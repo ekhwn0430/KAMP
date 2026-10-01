@@ -126,19 +126,21 @@ def get_regression_stats(X, y_true, model, res):
 # Normal 및 Undetected 지표 계산
 stats_list = []
 
-# AI2 -> AI0 회귀 및 통계
+# [중요] Slope/R² 비교를 위한 Undetected 전용 회귀모델 학습은 따로 수행 (PDF 허용 사항)
 reg_ai0_u = LinearRegression().fit(undetected_rms[['AI2_Current']], undetected_rms['AI0_Vibration'])
-undetected_res_ai0 = np.abs(undetected_rms['AI0_Vibration'] - reg_ai0_u.predict(undetected_rms[['AI2_Current']]))
-
-stats_list.append({**{'Pair': 'AI2 -> AI0', 'Group': 'Normal'}, **get_regression_stats(normal_rms[['AI2_Current']], normal_rms['AI0_Vibration'], reg_ai0, normal_res_ai0)})
-stats_list.append({**{'Pair': 'AI2 -> AI0', 'Group': 'Undetected'}, **get_regression_stats(undetected_rms[['AI2_Current']], undetected_rms['AI0_Vibration'], reg_ai0_u, undetected_res_ai0)})
-
-# AI2 -> AI1 회귀 및 통계
 reg_ai1_u = LinearRegression().fit(undetected_rms[['AI2_Current']], undetected_rms['AI1_Vibration'])
-undetected_res_ai1 = np.abs(undetected_rms['AI1_Vibration'] - reg_ai1_u.predict(undetected_rms[['AI2_Current']]))
 
+# [중요] 통계표의 Residual도 박스플롯과 똑같이 'Normal 모델(reg_ai0, reg_ai1)' 기준 잔차로 완벽 고정!
+undetected_res_ai0_fixed = np.abs(undetected_rms['AI0_Vibration'] - reg_ai0.predict(undetected_rms[['AI2_Current']]))
+undetected_res_ai1_fixed = np.abs(undetected_rms['AI1_Vibration'] - reg_ai1.predict(undetected_rms[['AI2_Current']]))
+
+# AI2 -> AI0 회귀 및 통계 (Normal은 reg_ai0, Undetected도 잔차는 reg_ai0 기준 적용)
+stats_list.append({**{'Pair': 'AI2 -> AI0', 'Group': 'Normal'}, **get_regression_stats(normal_rms[['AI2_Current']], normal_rms['AI0_Vibration'], reg_ai0, normal_res_ai0)})
+stats_list.append({**{'Pair': 'AI2 -> AI0', 'Group': 'Undetected'}, **get_regression_stats(undetected_rms[['AI2_Current']], undetected_rms['AI0_Vibration'], reg_ai0_u, undetected_res_ai0_fixed)})
+
+# AI2 -> AI1 회귀 및 통계 (Normal은 reg_ai1, Undetected도 잔차는 reg_ai1 기준 적용)
 stats_list.append({**{'Pair': 'AI2 -> AI1', 'Group': 'Normal'}, **get_regression_stats(normal_rms[['AI2_Current']], normal_rms['AI1_Vibration'], reg_ai1, normal_res_ai1)})
-stats_list.append({**{'Pair': 'AI2 -> AI1', 'Group': 'Undetected'}, **get_regression_stats(undetected_rms[['AI2_Current']], undetected_rms['AI1_Vibration'], reg_ai1_u, undetected_res_ai1)})
+stats_list.append({**{'Pair': 'AI2 -> AI1', 'Group': 'Undetected'}, **get_regression_stats(undetected_rms[['AI2_Current']], undetected_rms['AI1_Vibration'], reg_ai1_u, undetected_res_ai1_fixed)})
 
 stats_df = pd.DataFrame(stats_list)
 

@@ -85,7 +85,7 @@ for i, col in enumerate(cols):
     axes[i, 1].legend()
 
 plt.tight_layout()
-plt.savefig('step1_distribution_comparison.png', dpi=300)
+plt.savefig('04_req1_distribution_comparison.png', dpi=300)
 plt.close()
 
 # 7. [시각화 2] 주요 통계량 박스플롯(Median, Q1, Q3, Mean) 생성
@@ -116,7 +116,7 @@ for i, col in enumerate(cols):
     axes[i, 1].set_title(f'{titles[i]} - Rolling RMS Statistics (Median/Q1/Q3/Mean)', fontsize=12, fontweight='bold')
 
 plt.tight_layout()
-plt.savefig('step1_boxplot_statistics.png', dpi=300)
+plt.savefig('04_req1_boxplot_statistics.png', dpi=300)
 plt.close()
 
 print("-> [완료] 모든 시각화 이미지 파일 저장 완료!")
