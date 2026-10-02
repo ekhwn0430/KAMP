@@ -1,0 +1,7 @@
+family,feature,separation_auc,direction,holdout_fpr,abnormal_hit_rate,abnormal_break_n
+Timing,timing_deviation,0.9370689655172414,UP,0.006896551724137931,0.625,5
+Current,AI2_Current_std,0.7629310344827587,DOWN,0.027586206896551724,0.5,4
+Vibration,AI1_Vibration_rms,0.8827586206896552,UP,0.020689655172413793,0.625,5
+Coupling,PORD,1.0,UP,0.034482758620689655,1.0,8
+Balance,vibration_normalized_difference,0.8224137931034482,UP,0.013793103448275862,0.375,3
+Shape,H1_share,1.0,DOWN,0.041379310344827586,1.0,8

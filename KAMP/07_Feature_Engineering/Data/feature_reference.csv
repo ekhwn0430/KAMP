@@ -1,0 +1,7 @@
+metric,value
+cycle_duration_median,1.699999999999818
+cycle_duration_mean,1.6666666666666752
+cycle_duration_std,0.04721203974687546
+AI2_Current_rms_median,105.40470456920242
+AI0_Vibration_rms_median,0.06838410798605324
+AI1_Vibration_rms_median,0.08579725290005931
