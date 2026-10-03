@@ -1,0 +1,3 @@
+method,total_abnormal,evaluable,detected,missed,not_evaluable,normal_false_alarm_rows
+"RMS-IQR (1초, segment 내부)",600,428,235,193,172,75/14871
+AI2 Cycle (global+partial),600,589,589,0,11,539/19907

@@ -1,0 +1,8 @@
+status,rms_group,cycle_duration,return_error,template_corr,shape_rmse,amplitude,offset_ratio,n_units,detected_rate
+full_cycle,Normal,1.7,0.039,0.997,0.074,307.002,0.01,429,0.035
+full_cycle,RMS_detected,1.4,0.431,0.412,1.051,329.018,-0.035,4,1.0
+full_cycle,RMS_missed,1.6,0.449,-0.124,1.476,181.198,0.364,3,1.0
+partial,Normal,2.15,0.04,0.998,0.053,297.636,0.017,282,0.039
+partial,RMS_detected,2.4,0.336,0.479,1.0,308.597,0.31,5,1.0
+partial,RMS_missed,1.4,0.224,0.287,1.164,219.589,0.483,4,1.0
+partial,RMS_not_evaluable,0.7,,0.678,0.751,290.078,-0.117,1,1.0
