@@ -97,12 +97,12 @@ outlier_features['label'] = 'Outlier'
 
 # 4. 통합 피처 테이블 결합 및 저장
 comprehensive_feature_table = pd.concat([normal_features, outlier_features], ignore_index=True)
-comprehensive_feature_table.to_csv('segment_feature_table.csv', index=False)
+comprehensive_feature_table.to_csv('08_segment_feature_table.csv', index=False)
 
 print("===============================================================================================================")
 print(f"-> [완료] 종합 Feature Table 생성 완료!")
 print(f"-> 총 세그먼트 수: {len(comprehensive_feature_table)}개")
-print(f"-> 저장된 파일명: 'segment_feature_table.csv'")
+print(f"-> 저장된 파일명: '08_segment_feature_table.csv'")
 print("===============================================================================================================")
 
 pd.set_option('display.max_columns', None)

@@ -61,8 +61,8 @@ outlier_rms['label'] = 1 #이상
 final_feature_table = pd.concat([normal_rms, outlier_rms], ignore_index=True)
 
 # 5. 최종 CSV 저장
-final_feature_table.to_csv('feature_table.csv', index=False)
+final_feature_table.to_csv('01_feature_table.csv', index=False)
 print(
-    '전처리 완료 및 feature_table.csv 저장 완료 (총 행 수:'
+    '전처리 완료 및 01_feature_table.csv 저장 완료 (총 행 수:'
     f' {len(final_feature_table)}개)'
 )

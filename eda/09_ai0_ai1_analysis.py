@@ -70,7 +70,7 @@ print(f"-> 전체 이상 행 수: {len(outlier_rms)}개 | RMS 검출: {combined_
 # ===================================================================================
 # [주제 1] AI0 자체 이상특성 분석 및 시각화
 # ===================================================================================
-print("\n-> [생성 중] AI0 자체 이상특성 분석 시각화 ('ai0_individual_analysis.png')...")
+print("\n-> [생성 중] AI0 자체 이상특성 분석 시각화 ('09_ai0_individual_analysis.png')...")
 fig, axes = plt.subplots(1, 2, figsize=(15, 6))
 
 # Left: AI0 밀도 분포(KDE) 비교
@@ -102,14 +102,14 @@ if axes[1].get_legend():
     axes[1].get_legend().remove()
 
 plt.tight_layout()
-plt.savefig('ai0_individual_analysis.png', dpi=300)
+plt.savefig('09_ai0_individual_analysis.png', dpi=300)
 plt.close()
 
 
 # ===================================================================================
 # [주제 2] AI1 - AI2 관계 이상특성 (회귀 잔차) 분석 및 시각화
 # ===================================================================================
-print("-> [생성 중] AI1-AI2 관계 잔차 분석 시각화 ('ai1_ai2_relationship_analysis.png')...")
+print("-> [생성 중] AI1-AI2 관계 잔차 분석 시각화 ('09_ai1_ai2_relationship_analysis.png')...")
 
 # Normal 기준 AI2(Current) -> AI1(Vibration) 선형회귀 모델 학습
 lr_ai1_ai2 = LinearRegression().fit(normal_rms[['AI2_Current']], normal_rms['AI1_Vibration'])
@@ -145,7 +145,7 @@ if axes[1].get_legend():
     axes[1].get_legend().remove()
 
 plt.tight_layout()
-plt.savefig('ai1_ai2_relationship_analysis.png', dpi=300)
+plt.savefig('09_ai1_ai2_relationship_analysis.png', dpi=300)
 plt.close()
 
 print("===================================================================================")
