@@ -66,11 +66,11 @@ final_manifest = df[
 
 final_manifest = final_manifest.sort_values(
     by=['source', 'source_row'],
-    ascending=[True, True]
+    ascending=[True,True]
     )
 
 
-# 6. 최종 매니페스트 CSV 저장 (기존 10_02 파일에 덮어쓰기)
+# 6. 최종 매니페스트 CSV 저장 (기존 10_04 파일에 덮어쓰기)
 final_manifest.to_csv('10_04_manifest_all.csv', index=False)
 
 # 7. 결과 카운트 출력
