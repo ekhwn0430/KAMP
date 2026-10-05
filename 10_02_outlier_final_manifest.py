@@ -59,6 +59,7 @@ outlier_df['Outlier_Category'] = outlier_df.apply(
 # 6. 정통맨 결과와 Merge하기 위한 Primary Key 및 핵심 지표 컬럼 정리
 outlier_manifest = outlier_df[
     [
+        'source',
         'segment_id',
         'source_row',
         'RMS_Detected',
