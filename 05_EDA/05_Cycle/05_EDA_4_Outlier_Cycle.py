@@ -498,9 +498,8 @@ def main():
 
     # ---- 07 cycle_feature_table(adaptive detector)과 대응: 같은 segment·시작시각이면 07의 cycle_id 기록
     units["cycle_id_07"] = pd.NA
-    t07 = next((b / "KAMP" / "07_Feature_Engineering" / "Data" / "cycle_feature_table_all.csv"
-                for b in [HERE, *HERE.parents] if (b / "KAMP" / "07_Feature_Engineering" / "Data"
-                                                    / "cycle_feature_table_all.csv").exists()), None)
+    t07 = next((b / "07_Feature_Engineering" / "Data" / "cycle_feature_table_all.csv"
+                for b in [HERE, *HERE.parents] if (b / "07_Feature_Engineering" / "Data" / "cycle_feature_table_all.csv").exists()), None)
     if t07 is not None:
         f07 = pd.read_csv(t07, usecols=["source", "segment_id", "cycle_id", "cycle_start_sec"])
         f07["k"] = f07.cycle_start_sec.round(1)
