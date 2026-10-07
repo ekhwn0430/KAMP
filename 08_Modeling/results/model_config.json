@@ -1,0 +1,32 @@
+{
+  "data": "C:\\Users\\ekhwn\\StudioCodeProjects\\KAMP\\data\\preprocessed_data.csv",
+  "window": 10,
+  "stride": 1,
+  "test_rule": "segment 번호 % 5 == 2",
+  "n_windows": {
+    "abnormal": {
+      "test": 129,
+      "train": 299
+    },
+    "normal": {
+      "test": 3039,
+      "train": 11832
+    }
+  },
+  "n_features": 56,
+  "folds": 5,
+  "seed": 42,
+  "B_threshold": "Normal OOF score 99% quantile",
+  "selected": {
+    "A": {
+      "model": "RandomForest",
+      "features": "F4_+H1잔차",
+      "threshold": 0.33248326866677774
+    },
+    "B": {
+      "model": "Mahalanobis",
+      "features": "F4_+H1잔차",
+      "threshold": 141.5704279926976
+    }
+  }
+}
