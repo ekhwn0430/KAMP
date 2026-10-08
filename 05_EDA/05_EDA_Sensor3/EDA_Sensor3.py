@@ -3,6 +3,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
+# preprocess.py는 04_Data_Processing 폴더에 있으므로 import 경로에 추가한다.
+import sys
+try: _here = Path(__file__).resolve().parent
+except NameError: _here = Path.cwd()
+_root = next(p for p in [_here, *_here.parents] if (p / "04_Data_Processing" / "preprocess.py").exists())
+sys.path.insert(0, str(_root / "04_Data_Processing"))
 from preprocess import load_and_clean, make_features, feature_cols
 
 try: ROOT = Path(__file__).resolve().parent
@@ -199,7 +205,7 @@ try:
 except NameError:
     ROOT = Path.cwd()
 
-RAW = ROOT / "data"
+RAW = next(p / "data" for p in [ROOT, *ROOT.parents] if (p / "data" / "press_data_normal.csv").exists())
 OUT = ROOT / "data" / "processed"
 
 FILES = {"normal": "press_data_normal.csv", "abnormal": "outlier_data.csv"}

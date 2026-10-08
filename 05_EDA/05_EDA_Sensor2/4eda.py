@@ -1,3 +1,11 @@
+# --- 실행 위치와 관계없이 동작: 결과는 이 스크립트 폴더에 저장, 원본 CSV는 레포 최상단 data/에서 읽음 ---
+import os as _os
+from pathlib import Path as _Path
+_os.chdir(_Path(__file__).resolve().parent)
+DATA_DIR = next(_p / "data" for _p in [_Path.cwd(), *_Path.cwd().parents]
+                if (_p / "data" / "press_data_normal.csv").exists())
+# ---------------------------------------------------------------------------------------------
+
 import pandas as pd
 
 _original_to_datetime = pd.to_datetime
@@ -30,8 +38,8 @@ print("        [분포 시각화 및 통계량 분석]")
 print("==========================================")
 
 # 2. 데이터 로드
-normal_df = pd.read_csv('../../../data/press_data_normal.csv')
-outlier_df = pd.read_csv('../../../data/outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 # 3. TimeStamp 파싱 및 Segment ID 생성 함수
 def preprocess_and_segment(df, time_threshold=0.15):
@@ -169,8 +177,8 @@ import numpy as np
 
 print("데이터 로드 및 전처리 중...")
 # 1. CSV Load
-normal_df = pd.read_csv('../../../data/press_data_normal.csv')
-outlier_df = pd.read_csv('../../../data/outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 # 2. TimeStamp 파싱 및 Segment ID 생성 함수
 def preprocess_and_segment(df, time_threshold=0.15):
@@ -271,8 +279,8 @@ print("=====================================================================")
 
 # 2. 데이터 로드 (필요시 feature_table 또는 원본 데이터 로드)
 # 여기선 예시로 기존에 다듬어둔 데이터프레임을 활용하는 흐름으로 구성함.
-normal_df = pd.read_csv('../../../data/press_data_normal.csv')
-outlier_df = pd.read_csv('../../../data/outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 # 3. TimeStamp 파싱 및 Segment ID 생성 함수
 def preprocess_and_segment(df, time_threshold=0.15):
@@ -447,8 +455,8 @@ print("                     [가설 2 보강 : ND 지표 분석]")
 print("======================================================================")
 
 # 2. 데이터 로드 및 전처리
-normal_df = pd.read_csv('../../../data/press_data_normal.csv')
-outlier_df = pd.read_csv('../../../data/outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 def preprocess_and_segment(df, time_threshold=0.15):
     df = df.copy()
@@ -534,8 +542,8 @@ print("                                     [Segment별 종합 Feature Table 구
 print("===============================================================================================================")
 
 # 1. 데이터 로드 및 전처리 함수
-normal_df = pd.read_csv('../../../data/press_data_normal.csv')
-outlier_df = pd.read_csv('../../../data/outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 def preprocess_and_segment(df, time_threshold=0.15):
     df = df.copy()

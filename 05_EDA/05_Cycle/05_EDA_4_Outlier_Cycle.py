@@ -408,6 +408,14 @@ def build_units(segs, src, P, template_for, global_th, full_th, partial_th, part
 
 
 # =============================================================== main
+def _rel(p):
+    p = Path(p).resolve()
+    for base in [HERE, *HERE.parents]:
+        if (base / "data").is_dir() and p.is_relative_to(base):
+            return p.relative_to(base).as_posix()
+    return p.name
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     data, data_dir = load()
@@ -555,7 +563,7 @@ def main():
     meet.to_csv(OUT / "meeting_numbers.csv", index=False)
     cross_tab.to_csv(OUT / "meeting_crosstab.csv")
 
-    P.update(global_thresholds=global_th, full_cycle_thresholds=full_th, data_dir=data_dir,
+    P.update(global_thresholds=global_th, full_cycle_thresholds=full_th, data_dir=_rel(data_dir),
             normal_segments=len(nseg), abnormal_segments=len(oseg))
     with open(OUT / "frozen_params.json", "w", encoding="utf-8") as fp:
         json.dump(P, fp, ensure_ascii=False, indent=2, default=float)

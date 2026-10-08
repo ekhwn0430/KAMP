@@ -1,0 +1,2 @@
+source,segment_id,source_row,pos_in_seg,seg_len,t_end,label,split,anomaly_score,alarm,eval_set,RMS_Detected,Outlier_Category,H1_Residual_AI0,H1_Residual_AI1,H2_ND,H3_Current_Amplitude,error_type,R1_AMPLITUDE,R2_CURRENT_VIBRATION_RELATION,R3_VIBRATION_BALANCE,R4_CURRENT_OPERATING,reason_count,reason_codes
+abnormal,A0014,414,14,15,2022-07-17 10:53:03.309,1,train,0.2215300916649513,0,OOF,False,RMS 미검출,0.0388944877460799,0.0278796629101787,0.3828201330454183,53.2880255029222,FN,False,False,True,True,2,R3_VIBRATION_BALANCE|R4_CURRENT_OPERATING

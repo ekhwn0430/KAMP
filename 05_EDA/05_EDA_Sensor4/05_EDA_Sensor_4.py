@@ -1,3 +1,11 @@
+# --- 실행 위치와 관계없이 동작: 결과는 이 스크립트 폴더에 저장, 원본 CSV는 레포 최상단 data/에서 읽음 ---
+import os as _os
+from pathlib import Path as _Path
+_os.chdir(_Path(__file__).resolve().parent)
+DATA_DIR = next(_p / "data" for _p in [_Path.cwd(), *_Path.cwd().parents]
+                if (_p / "data" / "press_data_normal.csv").exists())
+# ---------------------------------------------------------------------------------------------
+
 # 공식 preprocessed_data.csv를 사용해 Normal과 Abnormal의 Raw / Rolling RMS 분포를 비교한다.
 # 04_Preprocessing에서 확정된 segment_id를 그대로 사용하며 Timestamp 정렬·segment 재생성은 하지 않는다.
 # 10-sample RMS는 완전한 window만 평가하고, 계산 불가능한 행은 not-evaluable로 유지한다.
@@ -551,8 +559,8 @@ print("                [AI0 및 AI1-AI2 관계 이상특성 분석 및 시각화
 print("===================================================================================") 
 
 # 2. 데이터 로드
-normal_df = pd.read_csv('press_data_normal.csv')
-outlier_df = pd.read_csv('outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 # 3. 타임스탬프 무결성 검증 및 세그먼트 분리 전처리 함수
 def preprocess_and_segment(df, time_threshold=0.15):

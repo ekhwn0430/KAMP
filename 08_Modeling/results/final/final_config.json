@@ -1,0 +1,26 @@
+{
+  "A": {
+    "model": "RandomForest",
+    "features": "F4_+H1잔차",
+    "threshold": 0.33248326866677774
+  },
+  "B": {
+    "model": "Mahalanobis",
+    "features": "F4_+H1잔차",
+    "threshold": 141.57042799269706
+  },
+  "final_rule": "A·B 모두 이상이면 즉시 경보",
+  "k": 1,
+  "k_selected_on": "train OOF only",
+  "calibration": "isotonic on A OOF scores",
+  "rows_eval_status": {
+    "evaluated": {
+      "abnormal": 428,
+      "normal": 14871
+    },
+    "not_evaluable": {
+      "abnormal": 172,
+      "normal": 5128
+    }
+  }
+}

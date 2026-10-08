@@ -236,6 +236,14 @@ def metrics(y, s, thr, seg, prefix):
 
 
 # =============================================================== main
+def _rel(p):
+    p = Path(p).resolve()
+    for base in [HERE, *HERE.parents]:
+        if (base / "data").is_dir() and p.is_relative_to(base):
+            return p.relative_to(base).as_posix()
+    return p.name
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     data, src_path = load()
@@ -290,7 +298,7 @@ def main():
             p["anomaly_score"], p["alarm"] = s, (s >= thr).astype(int)
             p.to_csv(OUT / f"{name}_predictions_{fw}.csv", index=False)
 
-    cfg = {"data": src_path, "window": WINDOW, "stride": STRIDE, "test_rule": f"segment 번호 % {TEST_EVERY} == {TEST_EVERY // 2}",
+    cfg = {"data": _rel(src_path), "window": WINDOW, "stride": STRIDE, "test_rule": f"segment 번호 % {TEST_EVERY} == {TEST_EVERY // 2}",
         "n_windows": W.groupby(["split", "source"]).size().unstack().to_dict(), "n_features": len(F),
         "folds": N_FOLDS, "seed": SEED, "B_threshold": f"Normal OOF score {1 - NORMAL_FPR_TARGET:.0%} quantile",
         "selected": chosen}

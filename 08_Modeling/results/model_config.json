@@ -1,5 +1,5 @@
 {
-  "data": "C:\\Users\\ekhwn\\StudioCodeProjects\\KAMP\\data\\preprocessed_data.csv",
+  "data": "data/processed/preprocessed_data.csv",
   "window": 10,
   "stride": 1,
   "test_rule": "segment 번호 % 5 == 2",
@@ -26,7 +26,7 @@
     "B": {
       "model": "Mahalanobis",
       "features": "F4_+H1잔차",
-      "threshold": 141.5704279926976
+      "threshold": 141.57042799269706
     }
   }
 }

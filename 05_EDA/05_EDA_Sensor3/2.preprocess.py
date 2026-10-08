@@ -24,7 +24,8 @@ import pandas as pd
 from numpy.lib.stride_tricks import sliding_window_view
 
 ROOT = Path(__file__).resolve().parent
-RAW, OUT = ROOT / "data", ROOT / "data" / "processed"
+RAW = next(p / "data" for p in [ROOT, *ROOT.parents] if (p / "data" / "press_data_normal.csv").exists())
+OUT = ROOT / "data" / "processed"
 
 FILES = {"normal": "press_data_normal.csv", "abnormal": "outlier_data.csv"}
 SIGNALS = {"AI0_Vibration": "v0", "AI1_Vibration": "v1", "AI2_Current": "cur"}

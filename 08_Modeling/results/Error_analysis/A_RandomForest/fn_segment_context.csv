@@ -1,0 +1,2 @@
+eval_set,source,segment_id,n_windows,n_alarm,alarm_ratio,min_score,max_score,mean_score
+OOF,abnormal,A0014,6,5,0.8333333333333334,0.2215300916649513,0.948646956977705,0.5392933297955022

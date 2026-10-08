@@ -1,0 +1,3 @@
+﻿model,score,TEST_Brier
+A RandomForest,raw predict_proba,0.002049973215529534
+A RandomForest,isotonic (OOF fit),0.0006426841417428772

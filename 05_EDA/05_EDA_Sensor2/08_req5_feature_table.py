@@ -1,3 +1,11 @@
+# --- 실행 위치와 관계없이 동작: 결과는 이 스크립트 폴더에 저장, 원본 CSV는 레포 최상단 data/에서 읽음 ---
+import os as _os
+from pathlib import Path as _Path
+_os.chdir(_Path(__file__).resolve().parent)
+DATA_DIR = next(_p / "data" for _p in [_Path.cwd(), *_Path.cwd().parents]
+                if (_p / "data" / "press_data_normal.csv").exists())
+# ---------------------------------------------------------------------------------------------
+
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -7,8 +15,8 @@ print("                                     [Segment별 종합 Feature Table 구
 print("===============================================================================================================")
 
 # 1. 데이터 로드 및 전처리 함수
-normal_df = pd.read_csv('press_data_normal.csv')
-outlier_df = pd.read_csv('outlier_data.csv')
+normal_df = pd.read_csv(DATA_DIR / 'press_data_normal.csv')
+outlier_df = pd.read_csv(DATA_DIR / 'outlier_data.csv')
 
 def preprocess_and_segment(df, time_threshold=0.15):
     df = df.copy()
