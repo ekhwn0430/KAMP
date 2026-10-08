@@ -1,56 +1,28 @@
 # %% [markdown]
 # # 08_02 Model Error Analysis
-# 
-# ## 목적
-# 
-# `08_01_model_comparison.py`에서 이미 선정된 두 모델의 예측 결과를
-# **재학습 없이** 분석한다.
-# 
-# - **A: RandomForest** (지도학습)
-# - **B: Mahalanobis** (Normal-only 이상탐지)
-# 
-# 결과는 다음 구조로 저장한다.
-# 
-# ```text
-# results/Error_analysis/
-# ├─ A_랜덤포레스트/
-# ├─ B_마할라노비스/
-# └─ C_비교/
-# ```
-# 
-# ### 분석 원칙
-# 
-# - 모델 재학습 / 재선정 없음
-# - Test 결과를 threshold 선정에 사용하지 않음
-# - 07 Cycle Feature는 predictor가 아니라 explanation context로 사용
-# - Reason Code는 모델 내부 인과 설명이 아니라 EDA 기반 post-hoc 해석
-# 
+#
+# 08_01_model_comparison.py에서 고른 두 모델(A: RandomForest, B: Mahalanobis)의
+# 예측 결과를 가지고 오류를 분석한다. 모델은 다시 학습하지 않고 저장된 예측값만 쓴다.
+#
+# 결과는 results/Error_analysis/ 아래 A_RandomForest, B_Mahalanobis, C_Comparison 폴더에 저장한다.
+#
+# 참고
+# - threshold는 Test 결과를 보고 정하지 않았다.
+# - 07 Cycle Feature는 모델 입력이 아니고, 오류를 해석할 때 참고용으로만 붙인다.
+# - Reason Code는 모델이 실제로 그렇게 판단했다는 뜻이 아니라, EDA 결과를 바탕으로 사후에 붙인 해석이다.
 
 """
 08_02 Model Error Analysis
-==========================
 
-목적
-----
-08_01_model_comparison.py에서 이미 선정된 두 모델의 예측 결과를
-재학습 없이 분석한다.
+08_01_model_comparison.py에서 고른 두 모델(A: RandomForest, B: Mahalanobis)의
+예측 결과를 가지고 오류를 분석한다. 모델은 다시 학습하지 않고 저장된 예측값만 쓴다.
 
-A: RandomForest  (지도학습)
-B: Mahalanobis   (Normal-only 이상탐지)
+결과는 results/Error_analysis/ 아래 A_RandomForest, B_Mahalanobis, C_Comparison 폴더에 저장한다.
 
-출력 구조
----------
-results/Error_analysis/
-├─ A_랜덤포레스트/
-├─ B_마할라노비스/
-└─ C_비교/
-
-주의
-----
-- 모델 재학습 / 재선정 없음
-- Test 결과를 threshold 선정에 사용하지 않음
-- 07 Cycle Feature는 predictor가 아니라 explanation context로 사용
-- Reason Code는 모델 내부 인과 설명이 아니라 EDA 기반 post-hoc 해석
+참고
+- threshold는 Test 결과를 보고 정하지 않았다.
+- 07 Cycle Feature는 모델 입력이 아니고, 오류를 해석할 때 참고용으로만 붙인다.
+- Reason Code는 모델이 실제로 그렇게 판단했다는 뜻이 아니라, EDA 결과를 바탕으로 사후에 붙인 해석이다.
 """
 
 from pathlib import Path
