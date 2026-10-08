@@ -1,0 +1,12 @@
+﻿source,eval_set,operational_state,n_rows
+abnormal,OOF,경보,298
+abnormal,OOF,주의,1
+abnormal,TEST,경보,129
+abnormal,,평가불가,172
+normal,OOF,경보,8
+normal,OOF,정상,11711
+normal,OOF,주의,113
+normal,TEST,경보,5
+normal,TEST,정상,2995
+normal,TEST,주의,39
+normal,,평가불가,5128

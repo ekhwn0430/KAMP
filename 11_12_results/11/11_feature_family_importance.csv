@@ -1,0 +1,8 @@
+﻿group,n_features,PR_AUC_drop_mean,PR_AUC_drop_std,interpretation
+전류 크기,8,0.0800254469837201,0.093659311962656,OOF permutation importance; 인과기여도 아님
+전류 파형형태,4,0.0426451203410783,0.0432654409021235,OOF permutation importance; 인과기여도 아님
+진동 파형형태,18,0.0163604656199948,0.0217135849083851,OOF permutation importance; 인과기여도 아님
+진동0 크기,8,0.0072331263278028,0.0076416630994264,OOF permutation importance; 인과기여도 아님
+진동1 크기,8,0.0025949271591763,0.0060920172302164,OOF permutation importance; 인과기여도 아님
+H1 잔차(전류 대비 진동),2,-1.3062381317078647e-05,0.0010853867049779,OOF permutation importance; 인과기여도 아님
+채널 관계,5,-0.000170543214485,0.000235666254116,OOF permutation importance; 인과기여도 아님

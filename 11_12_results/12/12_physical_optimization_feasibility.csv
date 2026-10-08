@@ -1,0 +1,7 @@
+﻿item,possible,reason
+펌프 압력 setpoint,False,"압력 계측치, 밸브 제어권한, 영향 실험 없음"
+유량·속도 setpoint,False,유량·램 위치·사이클 물리상태 측정 없음
+피크전력 최적화,False,AI2 측정 위치·전압·역률 미상; Current != Power
+진동·전류 관계 기반 검사 우선순위,True,08 예측과 11 사후 EDA explanation에 근거한 점검 추천만 가능
+k=2 운영모드,True,"08에서 계산된 민감도 비교로만 제시, 현재 고정 k=1 변경 금지"
+자동 설비 정지,False,현장 안전·정지비용·가동 검증 없음; 관리자 승인 필수

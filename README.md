@@ -13,6 +13,7 @@
 | 환경 | `requirements.txt` |
 | 학습용 데이터 | `data/press_data_normal.csv`, `data/outlier_data.csv` |
 | 테스트데이터 예측결과 | `08_Modeling/results/final/test_predictions_final.csv` |
+| 오류조건·운영 의사결정 결과 | `11_12_results/11/`, `11_12_results/12/` |
 
 ## 1. 실행 환경
 
@@ -51,6 +52,9 @@ python run_all.py
 | 7 | `08_Modeling/08_01_model_comparison.py` | 1초 윈도우 특징 56개, 모델 5종 × 특징 계단 5단계 비교, A/B 모델 선정 | `08_Modeling/results/` |
 | 8 | `08_Modeling/08_02_Model_Error_Analysis.py` | FN/FP 오류분석, Reason Code, A vs B 비교 | `08_Modeling/results/Error_analysis/` |
 | 9 | `08_Modeling/08_03_Final_Alarm_Policy.py` | 확률보정, 경보 등급·연속경보 규칙, 탐지 지연, permutation importance, 최종 예측 | `08_Modeling/results/final/` |
+| 10 | `KAMP_11_12_Independent/run_11_12.py` | 11 공정해석(조건별·상호작용 오류분석, 점검 가설), 12 운영 의사결정(4단계 상태, 점검 우선순위, KPI) | `11_12_results/11/`, `11_12_results/12/` |
+
+11·12 단계(`KAMP_11_12_Independent/run_11_12.py`)는 08 결과를 읽기만 하며 모델을 다시 학습하거나 임계값을 바꾸지 않는다. 08 코드 3개의 Git 해시로 버전을 고정해, 08 코드가 바뀌면 실행을 멈춘다. 자세한 내용은 `KAMP_11_12_Independent/README_11_12.md`.
 
 07_01을 05_Cycle보다 먼저 실행하는 이유: `05_EDA_4_Outlier_Cycle.py`가 07_01의 cycle 표를 읽어 참고 컬럼(`cycle_id_07`)을 채운다. 07_01은 전처리 데이터만 사용한다.
 
@@ -95,6 +99,12 @@ TEST 성능 (윈도우 3,168개: 정상 3,039 / 이상 129)
 | `08_Modeling/results/final/rows_final_status.csv` | 전체 20,599행 평가 상태 (not_evaluable 포함) |
 | `08_Modeling/results/Error_analysis/` | FN/FP 목록, Reason Code, A vs B 비교 |
 | `05_EDA/05_Cycle/results/cycle_outlier/` | Cycle 분석 결과 (segment별 판정, 회의용 숫자) |
+| `11_12_results/11/11_condition_performance.csv` | 운전구간·segment 길이·신호 이탈 조건별 TP/FP/FN/TN, Recall, 오경보율 |
+| `11_12_results/11/11_interaction_conditions.csv` | 두 조건 교차(전류 운전영역 × 전류-진동 관계 등)별 오경보율·미탐률 |
+| `11_12_results/11/11_fp_fn_windows.csv` | 오경보·미탐지 윈도우 목록과 신호 조건 |
+| `11_12_results/12/12_operating_rules.csv` | 정상/주의/경보/평가불가 운영 규칙과 대응 |
+| `11_12_results/12/12_segment_dispatch.csv` | segment 단위 점검 건 집계 |
+| `11_12_results/12/12_policy_tradeoff_READONLY.csv` | 경보 규칙 k별 탐지율·오경보 비교 (08 결과 그대로) |
 
 공통 key: `source` (normal/abnormal) + `segment_id` (N0000/A0000) + `source_row` (원본 CSV 행 번호)
 

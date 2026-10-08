@@ -1,0 +1,9 @@
+﻿reason_code,signal_pattern,source_flag,observed_meaning,physical_hypothesis_NOT_PROVEN,verification_needed,interpretation_limit
+R1,RMS amplitude 이상,rms_break,전류/진동 크기 변화,운전조건·구동계 변동 가능성,전기량·진동센서 범위 확인,압력/품질/부품 고장 확정 불가
+R2,Current–Vibration 정상관계 이탈,h1_break,전류에 비해 진동응답 이탈,기계적 전달·구속·운전조건 변화 가능성,전류와 두 진동채널 동시 점검,전류→진동 인과관계 확정 불가
+R3,Vibration 채널 균형 이탈,h2_break,AI0/AI1 균형 변화,측정위치/구조응답/운전조건 가능성,진동센서 체결·배선·설치위치 확인,AI0·AI1 물리 위치 미확인
+R4,Current 운전영역 이탈,current_ood,정상 Current support 벗어남,구동상태 또는 데이터 수집조건 차이 가능성,전원·모터·펌프 운전로그 확인,전류값으로 유압·하중 산정 불가
+C1,반복 timing 이탈,cycle_timing_break,AI2 약 1.7초 반복구조 변화,펌프/전기 반복현상 변화 가능성,PLC/모터 회전·주파수 동시계측,actual press stroke 및 aliasing 미확인
+C2,Cycle current support 이탈,cycle_current_break,cycle 수준 전류영역 이탈,정상 운전범위 밖 가능성,전기 운전로그 확인,전류 외삽 회귀 해석 제한
+C3,PORD / 응답 이탈,cycle_response_break,전류 조건부 진동응답 이탈,구동-구조 전달상태 변동 가능성,유압 압력·유량·진동 동기 검증,물리적 고장원인 확정 불가
+C4,AI2 cycle shape 이탈,cycle_shape_break,정규화된 파형 구조 변화,반복 전기/공정 상태 변동 가능성,원취득률·필터·sampling 및 PLC 비교,교류 aliasing으로 인한 가상 반복 가능

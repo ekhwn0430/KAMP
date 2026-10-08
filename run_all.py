@@ -26,12 +26,13 @@ STEPS = [
     ("08", "08_Modeling/08_01_model_comparison.py", "1초 윈도우 모델 비교, A/B 모델 선정"),
     ("08", "08_Modeling/08_02_Model_Error_Analysis.py", "FN/FP 오류분석, A vs B 비교"),
     ("08", "08_Modeling/08_03_Final_Alarm_Policy.py", "최종 경보 규칙, 중요도, 최종 test 예측"),
+    ("11", "KAMP_11_12_Independent/run_11_12.py", "11 공정해석·12 운영 의사결정 (08 결과 읽기 전용, 재학습 없음)"),
 ]
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--from", dest="start", default="04", help="이 단계 번호부터 실행 (04/05/07/08)")
+    ap.add_argument("--from", dest="start", default="04", help="이 단계 번호부터 실행 (04/05/07/08/11)")
     args = ap.parse_args()
 
     env = {**os.environ, "MPLBACKEND": "Agg", "PYTHONIOENCODING": "utf-8"}
@@ -48,7 +49,7 @@ def main():
             sys.exit(f"\n실패: {script} (exit {r.returncode})")
         print(f"      완료 {time.time() - t:.0f}초", flush=True)
     print(f"\n전체 완료 {time.time() - t_all:.0f}초")
-    print("최종 결과: 08_Modeling/results/final/ (test_predictions_final.csv 등)")
+    print("최종 결과: 08_Modeling/results/final/ (test_predictions_final.csv 등), 11_12_results/11, 11_12_results/12")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,8 @@
+﻿kpi,value,source
+TEST evaluated-window F1,0.9809885931558936,08 frozen policy
+TEST evaluated-normal FPR,0.0016452780519907,08 frozen policy
+TEST abnormal window recall,1.0,08 frozen policy
+TEST abnormal segment detect rate,1.0,08 frozen policy
+Not-evaluable rows (ALL),5300.0,08 rows_final_status.csv
+Not-evaluable abnormal rows (ALL),172.0,08 rows_final_status.csv
+Not-evaluable normal rows (ALL),5128.0,08 rows_final_status.csv

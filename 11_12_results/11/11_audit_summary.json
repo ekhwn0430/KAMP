@@ -1,0 +1,57 @@
+{
+  "reference_commit": "b1960321fc598ebb091f1bf4504918c9f0d55f64",
+  "source_sha": {
+    "08_01_model_comparison.py": "e79f6b65e61a0253321dc032924e059b151fa154",
+    "08_02_Model_Error_Analysis.py": "e3e5152690a9ba7576a85a3bd66101bc2810fce1",
+    "08_03_Final_Alarm_Policy.py": "f9c813356b7116b116aa2fa5c7e3b47c3ca4fee3"
+  },
+  "model_training": false,
+  "policy_changed": false,
+  "model_A": {
+    "model": "RandomForest",
+    "features": "F4_+H1잔차",
+    "threshold": 0.33248326866677774
+  },
+  "model_B": {
+    "model": "Mahalanobis",
+    "features": "F4_+H1잔차",
+    "threshold": 141.57042799269706
+  },
+  "k": 1,
+  "metrics": {
+    "OOF": {
+      "n": 12131,
+      "TP": 298,
+      "FP": 8,
+      "FN": 1,
+      "TN": 11824,
+      "precision": 0.9738562091503268,
+      "recall": 0.9966555183946488,
+      "F1": 0.9851239669421488,
+      "normal_FPR": 0.000676132521974307,
+      "miss_rate": 0.0033444816053511705
+    },
+    "TEST": {
+      "n": 3168,
+      "TP": 129,
+      "FP": 5,
+      "FN": 0,
+      "TN": 3034,
+      "precision": 0.9626865671641791,
+      "recall": 1.0,
+      "F1": 0.9809885931558935,
+      "normal_FPR": 0.0016452780519907865,
+      "miss_rate": 0.0
+    }
+  },
+  "case_count": 14,
+  "warnings": [
+    "TEST 오차조건 분석은 사후 설명이며, 테스트 성능을 보고 모델·threshold를 수정하지 않는다.",
+    "Abnormal과 Normal의 취득일이 달라 session confounding을 배제할 수 없다.",
+    "공식 TEST abnormal segment 수가 작고 window가 중첩돼 표본 독립성이 낮다.",
+    "Cycle/PORD/Shape은 최종 08 RF의 직접 입력이 아닌 공정설명용 맥락이다.",
+    "AI2 약 1.7초 반복은 motor current aliasing 가능성. stroke/phase 확정 불가.",
+    "상호 중첩되는 조건별 성능을 독립 집단으로 합산하지 않는다.",
+    "11_interaction_conditions.csv는 두 조건의 교차 집계이며 인과적 상호작용 효과가 아니다."
+  ]
+}

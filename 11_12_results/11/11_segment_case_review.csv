@@ -1,0 +1,548 @@
+﻿eval_set,source,segment_id,label,n_windows,n_alarm,n_fp,n_fn,rms_break_n,h1_break_n,h2_break_n,current_ood_n,cycle_context,start_sec,end_sec,is_error_segment
+OOF,normal,N0178,0,23,7,7,0,15,23,0,0,Full-cycle context,1349.957,1352.157,True
+OOF,normal,N0569,0,35,1,1,0,6,12,0,0,Full-cycle context,4364.193,4367.593,True
+OOF,abnormal,A0014,1,6,5,0,1,1,3,2,6,No full-cycle context,114.866,115.366,True
+OOF,abnormal,A0001,1,41,41,0,0,25,41,6,4,Full-cycle context,9.681,13.681,False
+OOF,abnormal,A0003,1,22,22,0,0,0,3,3,2,No full-cycle context,24.691,26.791,False
+OOF,abnormal,A0004,1,9,9,0,0,9,9,9,0,No full-cycle context,32.956,33.756,False
+OOF,abnormal,A0006,1,41,41,0,0,30,41,17,28,Full-cycle context,49.641,53.641,False
+OOF,abnormal,A0008,1,16,16,0,0,8,16,0,6,No full-cycle context,65.524,67.024,False
+OOF,abnormal,A0011,1,41,41,0,0,10,41,5,40,Full-cycle context,91.129,95.129,False
+OOF,abnormal,A0013,1,19,19,0,0,19,19,16,0,No full-cycle context,106.726,108.526,False
+OOF,abnormal,A0015,1,41,41,0,0,16,26,0,22,No full-cycle context,124.721,128.721,False
+OOF,abnormal,A0016,1,41,41,0,0,11,37,1,31,Full-cycle context,131.401,135.401,False
+OOF,abnormal,A0018,1,15,15,0,0,15,15,14,14,No full-cycle context,147.596,148.996,False
+OOF,abnormal,A0019,1,1,1,0,0,0,1,0,1,No full-cycle context,155.625,155.625,False
+OOF,abnormal,A0020,1,6,6,0,0,0,6,2,0,No full-cycle context,165.097,165.597,False
+OOF,normal,N0000,0,32,0,0,0,0,0,0,0,Full-cycle context,0.9,4.0,False
+OOF,normal,N0001,0,28,0,0,0,0,0,0,0,Full-cycle context,8.105,10.805,False
+OOF,normal,N0003,0,1,0,0,0,0,0,0,0,No full-cycle context,24.205,24.205,False
+OOF,normal,N0004,0,41,0,0,0,0,0,0,3,Full-cycle context,33.633,37.633,False
+OOF,normal,N0005,0,41,0,0,0,0,0,0,0,Full-cycle context,40.637,44.637,False
+OOF,normal,N0006,0,41,0,0,0,0,1,19,3,Full-cycle context,48.557,52.557,False
+OOF,normal,N0008,0,17,0,0,0,0,0,0,0,No full-cycle context,64.457,66.057,False
+OOF,normal,N0009,0,4,0,0,0,0,0,0,0,No full-cycle context,72.502,72.802,False
+OOF,normal,N0010,0,41,0,0,0,0,4,0,0,Full-cycle context,82.103,86.103,False
+OOF,normal,N0011,0,41,0,0,0,0,0,0,1,Full-cycle context,88.738,92.738,False
+OOF,normal,N0013,0,16,0,0,0,0,1,3,0,No full-cycle context,104.638,106.138,False
+OOF,normal,N0014,0,5,0,0,0,0,0,0,0,No full-cycle context,112.536,112.936,False
+OOF,normal,N0015,0,41,0,0,0,0,0,6,4,Full-cycle context,122.175,126.175,False
+OOF,normal,N0016,0,41,0,0,0,0,4,0,0,Full-cycle context,128.805,132.805,False
+OOF,normal,N0018,0,27,0,0,0,0,0,0,0,Full-cycle context,144.757,147.357,False
+OOF,normal,N0019,0,14,0,0,0,0,0,11,0,No full-cycle context,152.817,154.117,False
+OOF,normal,N0020,0,13,0,0,0,0,0,0,0,No full-cycle context,160.881,162.081,False
+OOF,normal,N0021,0,2,0,0,0,0,0,0,0,No full-cycle context,168.749,168.849,False
+OOF,normal,N0023,0,41,0,0,0,0,0,16,1,Full-cycle context,184.881,188.881,False
+OOF,normal,N0024,0,27,0,0,0,0,0,0,0,No full-cycle context,193.01,195.61,False
+OOF,normal,N0025,0,17,0,0,0,0,0,3,0,No full-cycle context,201.096,202.696,False
+OOF,normal,N0026,0,3,0,0,0,0,0,0,0,No full-cycle context,209.063,209.263,False
+OOF,normal,N0028,0,41,0,0,0,0,0,1,0,Full-cycle context,233.425,237.425,False
+OOF,normal,N0029,0,33,0,0,0,0,0,0,0,Full-cycle context,241.021,244.221,False
+OOF,normal,N0030,0,18,0,0,0,0,0,0,0,No full-cycle context,249.094,250.794,False
+OOF,normal,N0031,0,4,0,0,0,0,0,0,0,No full-cycle context,257.105,257.405,False
+OOF,normal,N0033,0,41,0,0,0,0,5,0,0,Full-cycle context,266.708,270.708,False
+OOF,normal,N0034,0,41,0,0,0,0,1,0,0,Full-cycle context,273.418,277.418,False
+OOF,normal,N0035,0,29,0,0,0,0,0,0,1,Full-cycle context,281.297,284.097,False
+OOF,normal,N0036,0,28,0,0,0,0,0,0,0,Full-cycle context,289.336,292.036,False
+OOF,normal,N0038,0,3,0,0,0,0,0,0,0,No full-cycle context,305.517,305.717,False
+OOF,normal,N0039,0,3,0,0,0,0,0,1,0,No full-cycle context,313.447,313.647,False
+OOF,normal,N0041,0,41,0,0,0,0,0,0,0,Full-cycle context,323.377,327.377,False
+OOF,normal,N0043,0,34,0,0,0,0,0,3,0,Full-cycle context,337.38,340.68,False
+OOF,normal,N0044,0,20,0,0,0,0,0,0,0,No full-cycle context,345.485,347.385,False
+OOF,normal,N0045,0,8,0,0,0,0,0,0,1,No full-cycle context,353.373,354.073,False
+OOF,normal,N0048,0,41,0,0,0,0,0,0,4,Full-cycle context,370.058,374.058,False
+OOF,normal,N0049,0,31,0,0,0,0,0,0,0,Full-cycle context,377.815,380.815,False
+OOF,normal,N0050,0,13,0,0,0,0,0,0,0,No full-cycle context,386.428,387.628,False
+OOF,normal,N0051,0,41,0,0,0,0,0,0,1,Full-cycle context,390.265,394.265,False
+OOF,normal,N0053,0,41,0,0,0,0,1,1,0,Full-cycle context,403.921,407.921,False
+OOF,normal,N0054,0,41,0,0,0,0,0,0,2,Full-cycle context,410.527,414.527,False
+OOF,normal,N0055,0,41,0,0,0,0,0,0,0,Full-cycle context,418.679,422.679,False
+OOF,normal,N0056,0,41,0,0,0,0,0,0,0,Full-cycle context,425.725,429.725,False
+OOF,normal,N0058,0,41,0,0,0,0,0,5,0,Full-cycle context,440.229,444.229,False
+OOF,normal,N0059,0,41,0,0,0,0,0,0,0,Full-cycle context,446.852,450.852,False
+OOF,normal,N0060,0,41,0,0,0,0,0,0,0,Full-cycle context,453.728,457.728,False
+OOF,normal,N0061,0,41,0,0,0,0,0,3,5,Full-cycle context,460.441,464.441,False
+OOF,normal,N0063,0,41,0,0,0,0,0,1,0,Full-cycle context,473.76,477.76,False
+OOF,normal,N0064,0,41,0,0,0,0,3,5,0,Full-cycle context,480.648,484.648,False
+OOF,normal,N0065,0,41,0,0,0,0,1,1,0,Full-cycle context,487.218,491.218,False
+OOF,normal,N0066,0,41,0,0,0,0,5,0,0,Full-cycle context,493.973,497.973,False
+OOF,normal,N0068,0,41,0,0,0,0,1,0,0,Full-cycle context,514.087,518.087,False
+OOF,normal,N0069,0,41,0,0,0,0,0,0,1,Full-cycle context,520.837,524.837,False
+OOF,normal,N0070,0,41,0,0,0,0,0,0,0,Full-cycle context,527.543,531.543,False
+OOF,normal,N0071,0,41,0,0,0,0,3,0,0,Full-cycle context,534.361,538.361,False
+OOF,normal,N0073,0,41,0,0,0,0,0,0,0,Full-cycle context,547.714,551.714,False
+OOF,normal,N0074,0,41,0,0,0,0,2,0,3,Full-cycle context,554.317,558.317,False
+OOF,normal,N0075,0,41,0,0,0,0,1,0,0,Full-cycle context,560.965,564.965,False
+OOF,normal,N0076,0,41,0,0,0,0,0,0,0,Full-cycle context,569.033,573.033,False
+OOF,normal,N0078,0,41,0,0,0,0,0,0,0,Full-cycle context,582.572,586.572,False
+OOF,normal,N0079,0,41,0,0,0,0,3,0,0,Full-cycle context,589.247,593.247,False
+OOF,normal,N0080,0,33,0,0,0,0,0,0,0,Full-cycle context,596.708,599.908,False
+OOF,normal,N0081,0,22,0,0,0,0,0,0,0,No full-cycle context,604.748,606.848,False
+OOF,normal,N0084,0,41,0,0,0,0,0,0,0,Full-cycle context,629.537,633.537,False
+OOF,normal,N0085,0,37,0,0,0,0,0,0,0,Full-cycle context,636.753,640.353,False
+OOF,normal,N0086,0,24,0,0,0,0,0,1,1,Full-cycle context,644.732,647.032,False
+OOF,normal,N0088,0,3,0,0,0,0,0,0,0,No full-cycle context,660.637,660.837,False
+OOF,normal,N0089,0,41,0,0,0,0,0,4,0,Full-cycle context,670.175,674.175,False
+OOF,normal,N0090,0,40,0,0,0,0,0,0,0,Full-cycle context,676.921,680.821,False
+OOF,normal,N0091,0,27,0,0,0,0,0,0,1,Full-cycle context,684.937,687.537,False
+OOF,normal,N0094,0,41,0,0,0,2,5,0,0,Full-cycle context,710.407,714.407,False
+OOF,normal,N0095,0,41,0,0,0,0,0,0,0,Full-cycle context,717.125,721.125,False
+OOF,normal,N0096,0,29,0,0,0,0,0,1,2,Full-cycle context,725.024,727.824,False
+OOF,normal,N0098,0,15,0,0,0,0,0,1,3,No full-cycle context,741.058,742.458,False
+OOF,normal,N0099,0,3,0,0,0,0,0,0,0,No full-cycle context,749.056,749.256,False
+OOF,normal,N0100,0,41,0,0,0,0,0,0,0,Full-cycle context,759.073,763.073,False
+OOF,normal,N0101,0,41,0,0,0,0,0,11,0,Full-cycle context,765.628,769.628,False
+OOF,normal,N0103,0,25,0,0,0,0,0,0,0,Full-cycle context,780.97,783.37,False
+OOF,normal,N0104,0,25,0,0,0,0,0,0,3,Full-cycle context,788.852,791.252,False
+OOF,normal,N0105,0,13,0,0,0,0,0,0,0,No full-cycle context,796.754,797.954,False
+OOF,normal,N0108,0,41,0,0,0,0,0,0,1,Full-cycle context,820.767,824.767,False
+OOF,normal,N0109,0,28,0,0,0,0,0,0,0,Full-cycle context,828.838,831.538,False
+OOF,normal,N0110,0,14,0,0,0,0,0,1,0,No full-cycle context,836.857,838.157,False
+OOF,normal,N0111,0,1,0,0,0,0,0,0,0,No full-cycle context,844.785,844.785,False
+OOF,normal,N0113,0,41,0,0,0,0,0,1,0,Full-cycle context,861.191,865.191,False
+OOF,normal,N0114,0,31,0,0,0,0,0,0,0,Full-cycle context,868.789,871.789,False
+OOF,normal,N0115,0,18,0,0,0,0,0,0,0,No full-cycle context,876.817,878.517,False
+OOF,normal,N0116,0,18,0,0,0,0,0,0,0,No full-cycle context,884.718,886.418,False
+OOF,normal,N0119,0,41,0,0,0,0,0,0,0,Full-cycle context,902.458,906.458,False
+OOF,normal,N0120,0,41,0,0,0,0,0,0,5,Full-cycle context,909.265,913.265,False
+OOF,normal,N0121,0,33,0,0,0,0,0,0,0,Full-cycle context,916.621,919.821,False
+OOF,normal,N0123,0,9,0,0,0,0,0,0,0,No full-cycle context,932.623,933.423,False
+OOF,normal,N0125,0,41,0,0,0,0,2,0,6,Full-cycle context,942.829,946.829,False
+OOF,normal,N0126,0,41,0,0,0,0,0,0,1,Full-cycle context,949.607,953.607,False
+OOF,normal,N0128,0,27,0,0,0,0,0,0,0,Full-cycle context,964.685,967.285,False
+OOF,normal,N0129,0,11,0,0,0,0,0,0,0,No full-cycle context,972.836,973.836,False
+OOF,normal,N0131,0,41,0,0,0,0,0,0,3,Full-cycle context,990.245,994.245,False
+OOF,normal,N0133,0,26,0,0,0,0,0,0,5,Full-cycle context,1005.206,1007.706,False
+OOF,normal,N0134,0,13,0,0,0,0,0,0,2,No full-cycle context,1013.232,1014.432,False
+OOF,normal,N0136,0,41,0,0,0,0,0,0,0,Full-cycle context,1030.421,1034.421,False
+OOF,normal,N0138,0,39,0,0,0,0,0,0,0,Full-cycle context,1045.408,1049.208,False
+OOF,normal,N0139,0,26,0,0,0,0,0,3,0,Full-cycle context,1053.361,1055.861,False
+OOF,normal,N0140,0,14,0,0,0,0,0,0,3,No full-cycle context,1061.385,1062.685,False
+OOF,normal,N0141,0,4,0,0,0,0,0,0,2,No full-cycle context,1069.368,1069.668,False
+OOF,normal,N0144,0,41,0,0,0,0,0,0,0,Full-cycle context,1087.185,1091.185,False
+OOF,normal,N0145,0,41,0,0,0,0,0,0,0,Full-cycle context,1093.944,1097.944,False
+OOF,normal,N0146,0,31,0,0,0,0,0,0,1,Full-cycle context,1101.605,1104.605,False
+OOF,normal,N0148,0,17,0,0,0,0,0,0,0,No full-cycle context,1117.581,1119.181,False
+OOF,normal,N0149,0,6,0,0,0,0,3,0,0,No full-cycle context,1125.451,1125.951,False
+OOF,normal,N0153,0,41,0,0,0,0,0,0,0,Full-cycle context,1158.255,1162.255,False
+OOF,normal,N0154,0,38,0,0,0,0,0,0,0,Full-cycle context,1165.352,1169.052,False
+OOF,normal,N0155,0,25,0,0,0,0,0,0,0,Full-cycle context,1173.357,1175.757,False
+OOF,normal,N0156,0,10,0,0,0,0,0,0,0,No full-cycle context,1181.449,1182.349,False
+OOF,normal,N0158,0,41,0,0,0,0,0,0,0,Full-cycle context,1198.725,1202.725,False
+OOF,normal,N0159,0,41,0,0,0,0,0,6,0,Full-cycle context,1205.517,1209.517,False
+OOF,normal,N0160,0,29,0,0,0,0,0,1,0,Full-cycle context,1213.45,1216.25,False
+OOF,normal,N0161,0,17,0,0,0,0,0,0,0,No full-cycle context,1221.418,1223.018,False
+OOF,normal,N0164,0,41,0,0,0,0,0,5,2,Full-cycle context,1246.012,1250.012,False
+OOF,normal,N0165,0,34,0,0,0,0,0,0,0,Full-cycle context,1253.317,1256.617,False
+OOF,normal,N0166,0,23,0,0,0,0,0,0,0,Full-cycle context,1261.297,1263.497,False
+OOF,normal,N0169,0,41,0,0,0,0,0,0,1,Full-cycle context,1286.685,1290.685,False
+OOF,normal,N0170,0,33,0,0,0,0,2,1,0,Full-cycle context,1294.239,1297.439,False
+OOF,normal,N0171,0,18,0,0,0,0,0,0,0,No full-cycle context,1302.381,1304.081,False
+OOF,normal,N0173,0,5,0,0,0,0,0,0,0,No full-cycle context,1318.143,1318.543,False
+OOF,normal,N0175,0,41,0,0,0,0,0,0,0,Full-cycle context,1327.959,1331.959,False
+OOF,normal,N0176,0,41,0,0,0,0,0,0,0,Full-cycle context,1334.73,1338.73,False
+OOF,normal,N0179,0,11,0,0,0,0,0,0,0,No full-cycle context,1357.953,1358.953,False
+OOF,normal,N0181,0,41,0,0,0,0,0,0,0,Full-cycle context,1374.817,1378.817,False
+OOF,normal,N0183,0,23,0,0,0,0,0,0,0,Full-cycle context,1390.101,1392.301,False
+OOF,normal,N0184,0,24,0,0,0,0,0,0,0,Full-cycle context,1398.085,1400.385,False
+OOF,normal,N0185,0,13,0,0,0,0,0,0,0,No full-cycle context,1406.025,1407.225,False
+OOF,normal,N0188,0,41,0,0,0,0,0,5,0,Full-cycle context,1429.856,1433.856,False
+OOF,normal,N0189,0,27,0,0,0,0,0,0,0,Full-cycle context,1437.868,1440.468,False
+OOF,normal,N0190,0,17,0,0,0,0,0,0,0,No full-cycle context,1445.821,1447.421,False
+OOF,normal,N0191,0,3,0,0,0,0,0,0,0,No full-cycle context,1453.801,1454.001,False
+OOF,normal,N0193,0,41,0,0,0,0,0,2,0,Full-cycle context,1470.477,1474.477,False
+OOF,normal,N0194,0,33,0,0,0,0,0,0,0,Full-cycle context,1477.887,1481.087,False
+OOF,normal,N0195,0,20,0,0,0,0,0,0,0,No full-cycle context,1485.956,1487.856,False
+OOF,normal,N0196,0,9,0,0,0,0,0,0,0,No full-cycle context,1494.017,1494.817,False
+OOF,normal,N0198,0,41,0,0,0,0,4,1,0,Full-cycle context,1511.029,1515.029,False
+OOF,normal,N0199,0,40,0,0,0,0,0,0,0,Full-cycle context,1517.965,1521.865,False
+OOF,normal,N0200,0,24,0,0,0,0,0,0,1,No full-cycle context,1525.974,1528.274,False
+OOF,normal,N0201,0,13,0,0,0,0,0,0,0,No full-cycle context,1533.925,1535.125,False
+OOF,normal,N0203,0,41,0,0,0,0,0,0,0,Full-cycle context,1551.009,1555.009,False
+OOF,normal,N0204,0,39,0,0,0,0,0,0,1,Full-cycle context,1558.068,1561.868,False
+OOF,normal,N0205,0,24,0,0,0,0,0,0,0,Full-cycle context,1566.141,1568.441,False
+OOF,normal,N0206,0,13,0,0,0,0,0,0,0,No full-cycle context,1574.089,1575.289,False
+OOF,normal,N0208,0,2,0,0,0,0,0,0,0,No full-cycle context,1589.948,1590.048,False
+OOF,normal,N0209,0,41,0,0,0,0,0,0,0,Full-cycle context,1592.794,1596.794,False
+OOF,normal,N0210,0,41,0,0,0,0,0,0,1,Full-cycle context,1599.529,1603.529,False
+OOF,normal,N0211,0,41,0,0,0,0,0,0,0,Full-cycle context,1606.345,1610.345,False
+OOF,normal,N0213,0,14,0,0,0,0,0,0,0,No full-cycle context,1622.304,1623.604,False
+OOF,normal,N0214,0,3,0,0,0,0,0,0,0,No full-cycle context,1630.269,1630.469,False
+OOF,normal,N0215,0,1,0,0,0,0,0,0,0,No full-cycle context,1638.298,1638.298,False
+OOF,normal,N0216,0,41,0,0,0,0,0,0,0,Full-cycle context,1647.892,1651.892,False
+OOF,normal,N0218,0,29,0,0,0,0,0,0,0,No full-cycle context,1662.324,1665.124,False
+OOF,normal,N0219,0,15,0,0,0,0,0,2,0,No full-cycle context,1670.388,1671.788,False
+OOF,normal,N0220,0,5,0,0,0,0,0,0,0,No full-cycle context,1678.288,1678.688,False
+OOF,normal,N0221,0,41,0,0,0,0,0,0,0,Full-cycle context,1688.194,1692.194,False
+OOF,normal,N0223,0,31,0,0,0,0,0,0,2,Full-cycle context,1702.421,1705.421,False
+OOF,normal,N0224,0,20,0,0,0,0,0,1,0,No full-cycle context,1710.413,1712.313,False
+OOF,normal,N0225,0,6,0,0,0,0,1,0,0,No full-cycle context,1718.427,1718.927,False
+OOF,normal,N0228,0,41,0,0,0,0,0,0,0,Full-cycle context,1743.105,1747.105,False
+OOF,normal,N0229,0,34,0,0,0,0,0,0,0,Full-cycle context,1750.473,1753.773,False
+OOF,normal,N0230,0,23,0,0,0,0,0,0,2,No full-cycle context,1758.455,1760.655,False
+OOF,normal,N0231,0,7,0,0,0,0,0,0,0,No full-cycle context,1766.588,1767.188,False
+OOF,normal,N0233,0,41,0,0,0,0,0,0,5,Full-cycle context,1776.626,1780.626,False
+OOF,normal,N0234,0,41,0,0,0,0,0,0,0,Full-cycle context,1783.165,1787.165,False
+OOF,normal,N0235,0,32,0,0,0,0,0,0,0,Full-cycle context,1790.889,1793.989,False
+OOF,normal,N0236,0,17,0,0,0,0,0,0,0,No full-cycle context,1798.925,1800.525,False
+OOF,normal,N0239,0,41,0,0,0,0,0,0,0,Full-cycle context,1816.756,1820.756,False
+OOF,normal,N0240,0,41,0,0,0,0,0,0,0,Full-cycle context,1823.569,1827.569,False
+OOF,normal,N0241,0,34,0,0,0,0,1,2,0,Full-cycle context,1830.88,1834.18,False
+OOF,normal,N0243,0,7,0,0,0,0,0,0,2,No full-cycle context,1846.913,1847.513,False
+OOF,normal,N0245,0,41,0,0,0,0,0,0,2,Full-cycle context,1863.826,1867.826,False
+OOF,normal,N0246,0,41,0,0,0,0,0,0,0,Full-cycle context,1871.879,1875.879,False
+OOF,normal,N0248,0,26,0,0,0,0,0,2,0,Full-cycle context,1886.788,1889.288,False
+OOF,normal,N0249,0,14,0,0,0,0,0,0,0,No full-cycle context,1894.782,1896.082,False
+OOF,normal,N0251,0,41,0,0,0,0,2,5,0,Full-cycle context,1912.081,1916.081,False
+OOF,normal,N0253,0,29,0,0,0,0,0,3,0,Full-cycle context,1926.829,1929.629,False
+OOF,normal,N0254,0,18,0,0,0,0,0,0,0,No full-cycle context,1934.857,1936.557,False
+OOF,normal,N0255,0,4,0,0,0,0,0,0,0,No full-cycle context,1942.845,1943.145,False
+OOF,normal,N0258,0,36,0,0,0,0,0,1,0,Full-cycle context,1966.652,1970.152,False
+OOF,normal,N0259,0,23,0,0,0,0,0,0,1,Full-cycle context,1974.525,1976.725,False
+OOF,normal,N0260,0,10,0,0,0,0,0,0,0,No full-cycle context,1982.475,1983.375,False
+OOF,normal,N0261,0,12,0,0,0,0,0,0,0,No full-cycle context,1990.457,1991.557,False
+OOF,normal,N0264,0,41,0,0,0,0,1,0,0,Full-cycle context,2015.721,2019.721,False
+OOF,normal,N0265,0,41,0,0,0,0,0,1,0,Full-cycle context,2022.415,2026.415,False
+OOF,normal,N0266,0,30,0,0,0,0,0,0,6,Full-cycle context,2030.309,2033.209,False
+OOF,normal,N0268,0,6,0,0,0,0,0,0,0,No full-cycle context,2046.26,2046.76,False
+OOF,normal,N0270,0,41,0,0,0,0,3,1,0,Full-cycle context,2056.24,2060.24,False
+OOF,normal,N0271,0,41,0,0,0,0,0,1,0,Full-cycle context,2062.868,2066.868,False
+OOF,normal,N0273,0,36,0,0,0,0,0,0,0,Full-cycle context,2078.049,2081.549,False
+OOF,normal,N0274,0,41,0,0,0,0,0,0,1,Full-cycle context,2086.809,2090.809,False
+OOF,normal,N0275,0,38,0,0,0,0,0,0,0,Full-cycle context,2093.937,2097.637,False
+OOF,normal,N0276,0,23,0,0,0,0,0,0,0,Full-cycle context,2102.052,2104.252,False
+OOF,normal,N0280,0,41,0,0,0,0,1,0,14,Full-cycle context,2135.095,2139.095,False
+OOF,normal,N0281,0,39,0,0,0,0,0,0,3,Full-cycle context,2142.116,2145.916,False
+OOF,normal,N0283,0,13,0,0,0,1,1,0,4,No full-cycle context,2158.177,2159.377,False
+OOF,normal,N0284,0,1,0,0,0,0,0,0,0,No full-cycle context,2166.149,2166.149,False
+OOF,normal,N0285,0,41,0,0,0,0,3,7,0,Full-cycle context,2168.879,2172.879,False
+OOF,normal,N0286,0,41,0,0,0,0,0,2,1,Full-cycle context,2175.525,2179.525,False
+OOF,normal,N0288,0,27,0,0,0,0,0,0,0,Full-cycle context,2190.349,2192.949,False
+OOF,normal,N0289,0,15,0,0,0,0,0,0,0,No full-cycle context,2198.309,2199.709,False
+OOF,normal,N0290,0,4,0,0,0,0,0,0,0,No full-cycle context,2206.289,2206.589,False
+OOF,normal,N0293,0,41,0,0,0,0,0,0,0,Full-cycle context,2222.913,2226.913,False
+OOF,normal,N0294,0,33,0,0,0,0,0,0,2,Full-cycle context,2230.241,2233.441,False
+OOF,normal,N0295,0,20,0,0,0,0,0,0,0,No full-cycle context,2238.307,2240.207,False
+OOF,normal,N0296,0,11,0,0,0,0,0,0,0,No full-cycle context,2246.237,2247.237,False
+OOF,normal,N0298,0,41,0,0,0,0,0,0,0,Full-cycle context,2263.199,2267.199,False
+OOF,normal,N0299,0,39,0,0,0,0,0,0,1,Full-cycle context,2270.127,2273.927,False
+OOF,normal,N0300,0,27,0,0,0,0,1,0,0,Full-cycle context,2278.117,2280.717,False
+OOF,normal,N0301,0,11,0,0,0,0,1,0,0,No full-cycle context,2286.128,2287.128,False
+OOF,normal,N0303,0,41,0,0,0,7,6,0,6,Full-cycle context,2303.377,2307.377,False
+OOF,normal,N0304,0,41,0,0,0,0,0,0,0,Full-cycle context,2310.183,2314.183,False
+OOF,normal,N0305,0,29,0,0,0,0,0,0,0,Full-cycle context,2318.177,2320.977,False
+OOF,normal,N0306,0,26,0,0,0,0,0,0,6,Full-cycle context,2326.299,2328.799,False
+OOF,normal,N0309,0,41,0,0,0,0,0,0,0,Full-cycle context,2351.789,2355.789,False
+OOF,normal,N0310,0,41,0,0,0,0,0,0,11,Full-cycle context,2358.568,2362.568,False
+OOF,normal,N0311,0,29,0,0,0,0,0,0,0,Full-cycle context,2366.412,2369.212,False
+OOF,normal,N0313,0,8,0,0,0,0,0,1,3,No full-cycle context,2382.165,2382.865,False
+OOF,normal,N0315,0,41,0,0,0,0,0,1,5,Full-cycle context,2392.065,2396.065,False
+OOF,normal,N0316,0,41,0,0,0,0,0,5,0,Full-cycle context,2398.72,2402.72,False
+OOF,normal,N0318,0,22,0,0,0,0,0,0,1,No full-cycle context,2414.081,2416.181,False
+OOF,normal,N0319,0,7,0,0,0,0,0,0,0,No full-cycle context,2422.081,2422.681,False
+OOF,normal,N0323,0,41,0,0,0,0,0,1,0,Full-cycle context,2446.746,2450.746,False
+OOF,normal,N0324,0,35,0,0,0,0,0,0,0,Full-cycle context,2454.057,2457.457,False
+OOF,normal,N0325,0,21,0,0,0,0,0,0,0,No full-cycle context,2462.047,2464.047,False
+OOF,normal,N0326,0,10,0,0,0,0,0,0,0,No full-cycle context,2470.062,2470.962,False
+OOF,normal,N0328,0,41,0,0,0,0,1,1,0,Full-cycle context,2480.08,2484.08,False
+OOF,normal,N0329,0,41,0,0,0,0,0,2,0,Full-cycle context,2486.746,2490.746,False
+OOF,normal,N0330,0,33,0,0,0,0,0,0,2,Full-cycle context,2494.121,2497.321,False
+OOF,normal,N0331,0,21,0,0,0,0,7,0,0,No full-cycle context,2502.173,2504.173,False
+OOF,normal,N0334,0,41,0,0,0,0,0,0,10,Full-cycle context,2527.015,2531.015,False
+OOF,normal,N0335,0,36,0,0,0,0,0,0,0,Full-cycle context,2534.195,2537.695,False
+OOF,normal,N0336,0,25,0,0,0,0,0,0,0,Full-cycle context,2542.197,2544.597,False
+OOF,normal,N0338,0,11,0,0,0,0,1,0,0,No full-cycle context,2558.172,2559.172,False
+OOF,normal,N0340,0,41,0,0,0,0,0,0,0,Full-cycle context,2568.409,2572.409,False
+OOF,normal,N0341,0,41,0,0,0,0,0,5,0,Full-cycle context,2575.256,2579.256,False
+OOF,normal,N0343,0,25,0,0,0,0,0,0,0,Full-cycle context,2590.317,2592.717,False
+OOF,normal,N0344,0,12,0,0,0,0,0,0,0,No full-cycle context,2598.325,2599.425,False
+OOF,normal,N0345,0,5,0,0,0,0,0,0,0,No full-cycle context,2606.178,2606.578,False
+OOF,normal,N0348,0,41,0,0,0,0,0,0,7,Full-cycle context,2622.482,2626.482,False
+OOF,normal,N0349,0,32,0,0,0,0,0,0,0,Full-cycle context,2630.227,2633.327,False
+OOF,normal,N0350,0,19,0,0,0,0,0,0,0,No full-cycle context,2638.149,2639.949,False
+OOF,normal,N0351,0,9,0,0,0,0,0,0,3,No full-cycle context,2646.176,2646.976,False
+OOF,normal,N0353,0,41,0,0,0,0,1,2,0,Full-cycle context,2656.365,2660.365,False
+OOF,normal,N0354,0,41,0,0,0,0,3,8,0,Full-cycle context,2663.039,2667.039,False
+OOF,normal,N0355,0,37,0,0,0,0,0,0,0,Full-cycle context,2670.213,2673.813,False
+OOF,normal,N0356,0,23,0,0,0,0,0,0,1,Full-cycle context,2678.193,2680.393,False
+OOF,normal,N0359,0,41,0,0,0,1,13,0,0,Full-cycle context,2703.237,2707.237,False
+OOF,normal,N0360,0,41,0,0,0,0,0,5,2,Full-cycle context,2711.321,2715.321,False
+OOF,normal,N0361,0,41,0,0,0,0,0,0,0,Full-cycle context,2718.125,2722.125,False
+OOF,normal,N0363,0,12,0,0,0,0,0,0,1,No full-cycle context,2734.233,2735.333,False
+OOF,normal,N0365,0,41,0,0,0,0,0,0,3,Full-cycle context,2751.773,2755.773,False
+OOF,normal,N0366,0,41,0,0,0,4,11,1,0,Full-cycle context,2758.442,2762.442,False
+OOF,normal,N0368,0,18,0,0,0,0,0,0,1,No full-cycle context,2774.366,2776.066,False
+OOF,normal,N0369,0,6,0,0,0,0,1,0,0,No full-cycle context,2782.305,2782.805,False
+OOF,normal,N0371,0,41,0,0,0,0,0,0,2,Full-cycle context,2792.465,2796.465,False
+OOF,normal,N0373,0,34,0,0,0,0,0,2,0,Full-cycle context,2806.539,2809.839,False
+OOF,normal,N0374,0,21,0,0,0,0,0,0,4,No full-cycle context,2814.624,2816.624,False
+OOF,normal,N0375,0,12,0,0,0,0,0,2,0,No full-cycle context,2822.525,2823.625,False
+OOF,normal,N0378,0,41,0,0,0,0,0,0,0,Full-cycle context,2839.372,2843.372,False
+OOF,normal,N0379,0,34,0,0,0,1,1,5,8,Full-cycle context,2846.669,2849.969,False
+OOF,normal,N0380,0,20,0,0,0,0,5,0,0,No full-cycle context,2854.668,2856.568,False
+OOF,normal,N0381,0,4,0,0,0,0,0,0,1,No full-cycle context,2862.845,2863.145,False
+OOF,normal,N0383,0,41,0,0,0,0,0,1,0,Full-cycle context,2880.612,2884.612,False
+OOF,normal,N0384,0,41,0,0,0,0,0,0,0,Full-cycle context,2887.44,2891.44,False
+OOF,normal,N0385,0,31,0,0,0,0,0,1,0,Full-cycle context,2895.057,2898.057,False
+OOF,normal,N0386,0,19,0,0,0,0,0,0,0,No full-cycle context,2903.031,2904.831,False
+OOF,normal,N0389,0,41,0,0,0,0,1,0,0,Full-cycle context,2921.026,2925.026,False
+OOF,normal,N0390,0,41,0,0,0,0,0,3,0,Full-cycle context,2927.677,2931.677,False
+OOF,normal,N0391,0,30,0,0,0,0,0,1,1,Full-cycle context,2935.465,2938.365,False
+OOF,normal,N0393,0,5,0,0,0,0,0,0,0,No full-cycle context,2951.618,2952.018,False
+OOF,normal,N0395,0,41,0,0,0,0,1,1,0,Full-cycle context,2968.248,2972.248,False
+OOF,normal,N0396,0,35,0,0,0,0,0,1,0,Full-cycle context,2975.589,2978.989,False
+OOF,normal,N0398,0,13,0,0,0,0,0,0,0,No full-cycle context,2991.468,2992.668,False
+OOF,normal,N0400,0,41,0,0,0,0,1,0,0,Full-cycle context,3016.708,3020.708,False
+OOF,normal,N0401,0,37,0,0,0,0,0,0,0,Full-cycle context,3023.717,3027.317,False
+OOF,normal,N0403,0,12,0,0,0,0,1,1,0,No full-cycle context,3039.787,3040.887,False
+OOF,normal,N0404,0,3,0,0,0,0,0,0,0,No full-cycle context,3047.777,3047.977,False
+OOF,normal,N0405,0,41,0,0,0,0,6,5,0,Full-cycle context,3057.305,3061.305,False
+OOF,normal,N0406,0,41,0,0,0,0,0,0,0,Full-cycle context,3063.929,3067.929,False
+OOF,normal,N0408,0,16,0,0,0,0,0,0,0,No full-cycle context,3079.829,3081.329,False
+OOF,normal,N0409,0,4,0,0,0,0,0,0,0,No full-cycle context,3087.697,3087.997,False
+OOF,normal,N0410,0,41,0,0,0,0,2,0,0,Full-cycle context,3097.737,3101.737,False
+OOF,normal,N0411,0,41,0,0,0,0,0,0,0,Full-cycle context,3104.329,3108.329,False
+OOF,normal,N0413,0,19,0,0,0,1,9,0,0,No full-cycle context,3120.082,3121.882,False
+OOF,normal,N0414,0,6,0,0,0,0,0,0,0,No full-cycle context,3127.992,3128.492,False
+OOF,normal,N0415,0,5,0,0,0,0,0,0,0,No full-cycle context,3136.0,3136.4,False
+OOF,normal,N0418,0,41,0,0,0,0,0,0,2,Full-cycle context,3160.49,3164.49,False
+OOF,normal,N0419,0,29,0,0,0,0,3,0,0,Full-cycle context,3168.577,3171.377,False
+OOF,normal,N0420,0,14,0,0,0,0,0,0,0,No full-cycle context,3176.497,3177.797,False
+OOF,normal,N0421,0,1,0,0,0,0,0,0,0,No full-cycle context,3184.532,3184.532,False
+OOF,normal,N0423,0,40,0,0,0,0,0,0,0,Full-cycle context,3200.64,3204.54,False
+OOF,normal,N0424,0,27,0,0,0,0,0,0,0,Full-cycle context,3208.757,3211.357,False
+OOF,normal,N0425,0,15,0,0,0,0,2,3,0,No full-cycle context,3216.789,3218.189,False
+OOF,normal,N0426,0,2,0,0,0,0,0,0,0,No full-cycle context,3224.628,3224.728,False
+OOF,normal,N0428,0,41,0,0,0,0,0,0,0,Full-cycle context,3240.884,3244.884,False
+OOF,normal,N0429,0,30,0,0,0,0,0,0,0,Full-cycle context,3248.656,3251.556,False
+OOF,normal,N0430,0,19,0,0,0,0,2,2,0,No full-cycle context,3256.663,3258.463,False
+OOF,normal,N0431,0,16,0,0,0,0,0,0,0,No full-cycle context,3264.844,3266.344,False
+OOF,normal,N0433,0,41,0,0,0,0,0,0,5,Full-cycle context,3282.217,3286.217,False
+OOF,normal,N0434,0,40,0,0,0,0,0,0,0,Full-cycle context,3288.925,3292.825,False
+OOF,normal,N0435,0,26,0,0,0,0,0,0,0,Full-cycle context,3296.974,3299.474,False
+OOF,normal,N0436,0,13,0,0,0,0,0,0,0,No full-cycle context,3304.969,3306.169,False
+OOF,normal,N0438,0,41,0,0,0,0,0,0,0,Full-cycle context,3322.049,3326.049,False
+OOF,normal,N0439,0,40,0,0,0,0,0,0,0,Full-cycle context,3329.139,3333.039,False
+OOF,normal,N0440,0,25,0,0,0,0,3,3,0,Full-cycle context,3337.349,3339.749,False
+OOF,normal,N0441,0,8,0,0,0,0,0,0,0,No full-cycle context,3345.632,3346.332,False
+OOF,normal,N0443,0,41,0,0,0,0,0,0,1,Full-cycle context,3363.633,3367.633,False
+OOF,normal,N0444,0,41,0,0,0,0,4,1,0,Full-cycle context,3370.545,3374.545,False
+OOF,normal,N0445,0,35,0,0,0,0,1,0,0,Full-cycle context,3377.708,3381.108,False
+OOF,normal,N0446,0,22,0,0,0,0,0,0,0,Full-cycle context,3385.713,3387.813,False
+OOF,normal,N0449,0,41,0,0,0,0,0,0,0,Full-cycle context,3410.765,3414.765,False
+OOF,normal,N0450,0,39,0,0,0,0,0,1,0,Full-cycle context,3417.674,3421.474,False
+OOF,normal,N0451,0,28,0,0,0,0,0,0,1,Full-cycle context,3425.628,3428.328,False
+OOF,normal,N0453,0,2,0,0,0,0,0,0,0,No full-cycle context,3441.566,3441.666,False
+OOF,normal,N0454,0,41,0,0,0,0,0,0,0,Full-cycle context,3451.061,3455.061,False
+OOF,normal,N0455,0,41,0,0,0,7,5,1,6,Full-cycle context,3457.828,3461.828,False
+OOF,normal,N0456,0,30,0,0,0,0,0,0,0,Full-cycle context,3465.673,3468.573,False
+OOF,normal,N0458,0,9,0,0,0,0,0,0,0,No full-cycle context,3481.66,3482.46,False
+OOF,normal,N0460,0,41,0,0,0,10,10,0,1,Full-cycle context,3498.468,3502.468,False
+OOF,normal,N0461,0,39,0,0,0,0,0,0,0,Full-cycle context,3505.474,3509.274,False
+OOF,normal,N0463,0,25,0,0,0,0,0,0,0,No full-cycle context,3521.469,3523.869,False
+OOF,normal,N0464,0,11,0,0,0,0,0,0,0,No full-cycle context,3529.44,3530.44,False
+OOF,normal,N0466,0,41,0,0,0,0,0,1,0,Full-cycle context,3546.649,3550.649,False
+OOF,normal,N0468,0,27,0,0,0,0,0,0,0,Full-cycle context,3561.3,3563.9,False
+OOF,normal,N0469,0,28,0,0,0,2,2,0,0,Full-cycle context,3569.228,3571.928,False
+OOF,normal,N0470,0,15,0,0,0,0,0,0,0,No full-cycle context,3577.252,3578.652,False
+OOF,normal,N0471,0,2,0,0,0,0,0,0,0,No full-cycle context,3585.2,3585.3,False
+OOF,normal,N0473,0,41,0,0,0,0,0,0,0,Full-cycle context,3601.541,3605.541,False
+OOF,normal,N0474,0,30,0,0,0,0,0,0,0,Full-cycle context,3609.246,3612.146,False
+OOF,normal,N0475,0,18,0,0,0,0,0,0,0,No full-cycle context,3617.273,3618.973,False
+OOF,normal,N0476,0,5,0,0,0,0,0,0,0,No full-cycle context,3625.298,3625.698,False
+OOF,normal,N0478,0,41,0,0,0,0,0,0,0,Full-cycle context,3641.685,3645.685,False
+OOF,normal,N0479,0,41,0,0,0,0,0,0,0,Full-cycle context,3650.941,3654.941,False
+OOF,normal,N0480,0,41,0,0,0,0,0,0,0,Full-cycle context,3657.713,3661.713,False
+OOF,normal,N0481,0,32,0,0,0,0,0,0,0,Full-cycle context,3665.405,3668.505,False
+OOF,normal,N0483,0,35,0,0,0,0,0,0,0,Full-cycle context,3681.177,3684.577,False
+OOF,normal,N0484,0,35,0,0,0,0,0,0,0,Full-cycle context,3689.052,3692.452,False
+OOF,normal,N0485,0,35,0,0,0,0,0,0,0,Full-cycle context,3697.041,3700.441,False
+OOF,normal,N0486,0,34,0,0,0,0,0,0,0,Full-cycle context,3705.187,3708.487,False
+OOF,normal,N0488,0,14,0,0,0,0,0,0,0,No full-cycle context,3721.099,3722.399,False
+OOF,normal,N0489,0,12,0,0,0,0,0,0,0,No full-cycle context,3729.206,3730.306,False
+OOF,normal,N0491,0,41,0,0,0,0,0,0,0,Full-cycle context,3754.261,3758.261,False
+OOF,normal,N0493,0,30,0,0,0,0,0,0,0,Full-cycle context,3769.052,3771.952,False
+OOF,normal,N0494,0,18,0,0,0,0,0,0,0,No full-cycle context,3777.013,3778.713,False
+OOF,normal,N0495,0,6,0,0,0,0,0,0,0,No full-cycle context,3785.075,3785.575,False
+OOF,normal,N0496,0,4,0,0,0,0,0,0,0,No full-cycle context,3793.109,3793.409,False
+OOF,normal,N0498,0,41,0,0,0,0,0,0,0,Full-cycle context,3810.729,3814.729,False
+OOF,normal,N0499,0,41,0,0,0,0,0,0,0,Full-cycle context,3817.383,3821.383,False
+OOF,normal,N0500,0,28,0,0,0,0,0,0,0,No full-cycle context,3825.341,3828.041,False
+OOF,normal,N0501,0,15,0,0,0,0,0,0,0,No full-cycle context,3833.281,3834.681,False
+OOF,normal,N0503,0,4,0,0,0,0,0,0,0,No full-cycle context,3849.141,3849.441,False
+OOF,normal,N0504,0,41,0,0,0,0,0,0,0,Full-cycle context,3858.736,3862.736,False
+OOF,normal,N0505,0,41,0,0,0,0,0,0,0,Full-cycle context,3865.69,3869.69,False
+OOF,normal,N0506,0,29,0,0,0,0,0,0,0,Full-cycle context,3873.38,3876.18,False
+OOF,normal,N0508,0,4,0,0,0,0,0,0,0,No full-cycle context,3889.395,3889.695,False
+OOF,normal,N0509,0,41,0,0,0,0,0,0,0,Full-cycle context,3899.137,3903.137,False
+OOF,normal,N0510,0,41,0,0,0,0,0,4,0,Full-cycle context,3905.725,3909.725,False
+OOF,normal,N0511,0,29,0,0,0,0,0,0,0,No full-cycle context,3913.621,3916.421,False
+OOF,normal,N0513,0,4,0,0,0,0,0,0,0,No full-cycle context,3929.621,3929.921,False
+OOF,normal,N0514,0,41,0,0,0,0,0,0,0,Full-cycle context,3946.085,3950.085,False
+OOF,normal,N0515,0,41,0,0,0,0,0,0,0,Full-cycle context,3954.111,3958.111,False
+OOF,normal,N0516,0,31,0,0,0,0,0,0,0,Full-cycle context,3961.977,3964.977,False
+OOF,normal,N0518,0,4,0,0,0,0,0,0,0,No full-cycle context,3978.06,3978.36,False
+OOF,normal,N0519,0,41,0,0,0,0,0,0,0,Full-cycle context,3987.639,3991.639,False
+OOF,normal,N0520,0,41,0,0,0,0,0,0,0,Full-cycle context,3994.289,3998.289,False
+OOF,normal,N0521,0,30,0,0,0,0,0,0,0,Full-cycle context,4002.014,4004.914,False
+OOF,normal,N0523,0,2,0,0,0,0,0,0,0,No full-cycle context,4018.032,4018.132,False
+OOF,normal,N0524,0,41,0,0,0,0,0,0,0,Full-cycle context,4028.7,4032.7,False
+OOF,normal,N0525,0,41,0,0,0,0,0,0,0,Full-cycle context,4035.385,4039.385,False
+OOF,normal,N0526,0,40,0,0,0,0,0,0,0,Full-cycle context,4042.148,4046.048,False
+OOF,normal,N0528,0,16,0,0,0,0,0,0,0,No full-cycle context,4058.136,4059.636,False
+OOF,normal,N0529,0,2,0,0,0,0,0,0,0,No full-cycle context,4066.06,4066.16,False
+OOF,normal,N0531,0,41,0,0,0,0,0,0,0,Full-cycle context,4075.497,4079.497,False
+OOF,normal,N0533,0,29,0,0,0,0,0,0,0,No full-cycle context,4090.079,4092.879,False
+OOF,normal,N0534,0,16,0,0,0,0,0,0,0,No full-cycle context,4098.099,4099.599,False
+OOF,normal,N0535,0,1,0,0,0,0,0,0,0,No full-cycle context,4106.132,4106.132,False
+OOF,normal,N0536,0,41,0,0,0,0,0,0,0,Full-cycle context,4115.585,4119.585,False
+OOF,normal,N0538,0,26,0,0,0,0,0,0,0,Full-cycle context,4130.557,4133.057,False
+OOF,normal,N0539,0,14,0,0,0,0,0,0,0,No full-cycle context,4138.59,4139.89,False
+OOF,normal,N0540,0,1,0,0,0,0,0,0,0,No full-cycle context,4146.569,4146.569,False
+OOF,normal,N0543,0,41,0,0,0,0,0,0,0,Full-cycle context,4170.562,4174.562,False
+OOF,normal,N0544,0,27,0,0,0,0,0,0,0,No full-cycle context,4178.655,4181.255,False
+OOF,normal,N0545,0,13,0,0,0,0,0,0,0,No full-cycle context,4186.716,4187.916,False
+OOF,normal,N0548,0,41,0,0,0,0,0,0,0,Full-cycle context,4212.049,4216.049,False
+OOF,normal,N0549,0,40,0,0,0,0,0,0,0,Full-cycle context,4218.936,4222.836,False
+OOF,normal,N0550,0,37,0,0,0,0,0,0,0,Full-cycle context,4227.128,4230.728,False
+OOF,normal,N0551,0,36,0,0,0,0,0,0,0,Full-cycle context,4235.153,4238.653,False
+OOF,normal,N0553,0,8,0,0,0,0,0,0,0,No full-cycle context,4251.307,4252.007,False
+OOF,normal,N0555,0,41,0,0,0,0,0,0,0,Full-cycle context,4261.418,4265.418,False
+OOF,normal,N0556,0,41,0,0,0,0,0,0,0,Full-cycle context,4268.229,4272.229,False
+OOF,normal,N0558,0,21,0,0,0,0,0,0,0,Full-cycle context,4283.708,4285.708,False
+OOF,normal,N0559,0,10,0,0,0,0,0,0,0,No full-cycle context,4291.669,4292.569,False
+OOF,normal,N0561,0,41,0,0,0,0,0,0,0,Full-cycle context,4308.671,4312.671,False
+OOF,normal,N0563,0,35,0,0,0,0,0,0,0,Full-cycle context,4324.065,4327.465,False
+OOF,normal,N0564,0,21,0,0,0,0,0,0,0,No full-cycle context,4332.128,4334.128,False
+OOF,normal,N0565,0,9,0,0,0,0,0,0,0,No full-cycle context,4340.076,4340.876,False
+OOF,normal,N0568,0,41,0,0,0,0,0,0,0,Full-cycle context,4356.936,4360.936,False
+OOF,normal,N0570,0,33,0,0,0,0,0,0,2,Full-cycle context,4372.349,4375.549,False
+OOF,normal,N0571,0,21,0,0,0,0,0,4,0,Full-cycle context,4380.4,4382.4,False
+OOF,normal,N0574,0,41,0,0,0,0,0,0,0,Full-cycle context,4405.621,4409.621,False
+OOF,normal,N0575,0,41,0,0,0,0,1,0,10,Full-cycle context,4413.721,4417.721,False
+OOF,normal,N0576,0,40,0,0,0,0,0,0,0,Full-cycle context,4420.337,4424.237,False
+OOF,normal,N0578,0,26,0,0,0,0,3,0,0,Full-cycle context,4436.211,4438.711,False
+OOF,normal,N0579,0,15,0,0,0,0,0,0,0,No full-cycle context,4444.25,4445.65,False
+OOF,normal,N0580,0,1,0,0,0,0,0,0,0,No full-cycle context,4452.12,4452.12,False
+OOF,normal,N0581,0,41,0,0,0,0,0,0,0,Full-cycle context,4469.65,4473.65,False
+OOF,normal,N0583,0,28,0,0,0,0,0,0,0,Full-cycle context,4484.216,4486.916,False
+OOF,normal,N0584,0,16,0,0,0,0,0,0,0,No full-cycle context,4492.32,4493.82,False
+OOF,normal,N0585,0,2,0,0,0,0,0,0,0,No full-cycle context,4500.257,4500.357,False
+OOF,normal,N0586,0,41,0,0,0,0,1,1,10,Full-cycle context,4517.9,4521.9,False
+OOF,normal,N0588,0,33,0,0,0,0,0,7,0,Full-cycle context,4532.117,4535.317,False
+OOF,normal,N0589,0,20,0,0,0,0,0,1,0,No full-cycle context,4540.097,4541.997,False
+OOF,normal,N0590,0,9,0,0,0,0,1,0,0,No full-cycle context,4548.105,4548.905,False
+OOF,normal,N0593,0,37,0,0,0,0,0,1,0,Full-cycle context,4572.175,4575.775,False
+OOF,normal,N0594,0,26,0,0,0,0,0,0,1,Full-cycle context,4580.273,4582.773,False
+OOF,normal,N0595,0,13,0,0,0,0,0,0,0,No full-cycle context,4588.258,4589.458,False
+OOF,normal,N0598,0,35,0,0,0,0,0,2,0,Full-cycle context,4612.409,4615.809,False
+TEST,normal,N0067,0,41,3,3,0,1,10,0,0,Full-cycle context,507.305,511.305,True
+TEST,normal,N0052,0,41,2,2,0,3,10,0,0,Full-cycle context,397.112,401.112,True
+TEST,abnormal,A0002,1,38,38,0,0,34,34,5,0,No full-cycle context,16.572,20.272,False
+TEST,abnormal,A0007,1,31,31,0,0,20,31,0,21,No full-cycle context,57.364,60.364,False
+TEST,abnormal,A0012,1,33,33,0,0,21,33,12,25,Full-cycle context,98.612,101.812,False
+TEST,abnormal,A0017,1,27,27,0,0,16,27,2,20,Full-cycle context,139.51,142.11,False
+TEST,normal,N0002,0,15,0,0,0,0,0,0,1,No full-cycle context,16.148,17.548,False
+TEST,normal,N0007,0,32,0,0,0,0,0,0,0,Full-cycle context,56.349,59.449,False
+TEST,normal,N0012,0,31,0,0,0,0,0,0,0,Full-cycle context,96.527,99.527,False
+TEST,normal,N0017,0,27,0,0,0,0,0,0,1,No full-cycle context,136.802,139.402,False
+TEST,normal,N0022,0,41,0,0,0,0,0,0,0,Full-cycle context,178.215,182.215,False
+TEST,normal,N0027,0,41,0,0,0,0,0,9,0,Full-cycle context,225.557,229.557,False
+TEST,normal,N0037,0,15,0,0,0,0,0,0,0,No full-cycle context,297.522,298.922,False
+TEST,normal,N0042,0,41,0,0,0,0,0,0,2,Full-cycle context,329.888,333.888,False
+TEST,normal,N0047,0,41,0,0,0,0,0,0,0,Full-cycle context,363.441,367.441,False
+TEST,normal,N0057,0,41,0,0,0,0,0,0,0,Full-cycle context,433.528,437.528,False
+TEST,normal,N0062,0,41,0,0,0,0,0,10,5,Full-cycle context,467.205,471.205,False
+TEST,normal,N0072,0,41,0,0,0,0,0,0,5,Full-cycle context,540.965,544.965,False
+TEST,normal,N0077,0,3,0,0,0,0,0,0,0,No full-cycle context,579.743,579.943,False
+TEST,normal,N0082,0,7,0,0,0,0,0,0,0,No full-cycle context,612.777,613.377,False
+TEST,normal,N0087,0,14,0,0,0,0,0,0,4,No full-cycle context,652.777,654.077,False
+TEST,normal,N0092,0,14,0,0,0,0,0,1,0,No full-cycle context,693.147,694.447,False
+TEST,normal,N0097,0,16,0,0,0,0,0,0,0,No full-cycle context,733.045,734.545,False
+TEST,normal,N0102,0,36,0,0,0,0,0,0,0,Full-cycle context,772.945,776.445,False
+TEST,normal,N0107,0,41,0,0,0,0,0,0,0,Full-cycle context,814.217,818.217,False
+TEST,normal,N0112,0,41,0,0,0,0,0,1,0,Full-cycle context,854.465,858.465,False
+TEST,normal,N0117,0,8,0,0,0,0,0,0,0,No full-cycle context,892.502,893.202,False
+TEST,normal,N0122,0,20,0,0,0,3,4,1,0,No full-cycle context,924.55,926.45,False
+TEST,normal,N0127,0,39,0,0,0,0,12,0,0,Full-cycle context,956.666,960.466,False
+TEST,normal,N0132,0,40,0,0,0,0,0,0,0,Full-cycle context,997.148,1001.048,False
+TEST,normal,N0137,0,39,0,0,0,0,0,1,1,Full-cycle context,1037.328,1041.128,False
+TEST,normal,N0147,0,17,0,0,0,0,0,0,0,No full-cycle context,1109.753,1111.353,False
+TEST,normal,N0152,0,41,0,0,0,0,0,0,4,Full-cycle context,1150.309,1154.309,False
+TEST,normal,N0162,0,4,0,0,0,0,0,0,0,No full-cycle context,1229.398,1229.698,False
+TEST,normal,N0167,0,10,0,0,0,0,1,0,0,No full-cycle context,1269.289,1270.189,False
+TEST,normal,N0172,0,17,0,0,0,0,0,7,0,No full-cycle context,1310.309,1311.909,False
+TEST,normal,N0177,0,37,0,0,0,0,0,0,1,Full-cycle context,1342.05,1345.65,False
+TEST,normal,N0182,0,38,0,0,0,0,0,0,0,Full-cycle context,1381.984,1385.684,False
+TEST,normal,N0187,0,41,0,0,0,0,0,1,0,Full-cycle context,1423.151,1427.151,False
+TEST,normal,N0192,0,41,0,0,0,0,0,0,0,Full-cycle context,1463.535,1467.535,False
+TEST,normal,N0207,0,3,0,0,0,0,0,0,0,No full-cycle context,1581.972,1582.172,False
+TEST,normal,N0212,0,29,0,0,0,0,0,0,0,Full-cycle context,1614.215,1617.015,False
+TEST,normal,N0217,0,41,0,0,0,0,0,0,0,Full-cycle context,1654.345,1658.345,False
+TEST,normal,N0222,0,41,0,0,0,0,0,0,0,Full-cycle context,1694.889,1698.889,False
+TEST,normal,N0227,0,41,0,0,0,0,2,2,0,Full-cycle context,1734.905,1738.905,False
+TEST,normal,N0237,0,6,0,0,0,0,0,0,0,No full-cycle context,1806.817,1807.317,False
+TEST,normal,N0242,0,20,0,0,0,0,0,1,0,No full-cycle context,1838.924,1840.824,False
+TEST,normal,N0247,0,41,0,0,0,0,0,0,0,Full-cycle context,1878.813,1882.813,False
+TEST,normal,N0252,0,41,0,0,0,0,0,0,7,Full-cycle context,1918.901,1922.901,False
+TEST,normal,N0257,0,41,0,0,0,0,0,0,3,Full-cycle context,1959.489,1963.489,False
+TEST,normal,N0267,0,17,0,0,0,0,0,0,0,No full-cycle context,2038.279,2039.879,False
+TEST,normal,N0272,0,34,0,0,0,0,0,0,0,Full-cycle context,2070.125,2073.425,False
+TEST,normal,N0277,0,12,0,0,0,0,0,0,1,No full-cycle context,2110.028,2111.128,False
+TEST,normal,N0282,0,24,0,0,0,0,0,9,0,No full-cycle context,2150.196,2152.496,False
+TEST,normal,N0287,0,41,0,0,0,0,0,0,0,Full-cycle context,2182.441,2186.441,False
+TEST,normal,N0292,0,41,0,0,0,0,0,3,0,Full-cycle context,2216.037,2220.037,False
+TEST,normal,N0307,0,14,0,0,0,0,0,0,0,No full-cycle context,2334.337,2335.637,False
+TEST,normal,N0312,0,15,0,0,0,0,0,0,1,No full-cycle context,2374.352,2375.752,False
+TEST,normal,N0317,0,33,0,0,0,0,0,0,0,Full-cycle context,2406.141,2409.341,False
+TEST,normal,N0322,0,41,0,0,0,0,1,1,0,Full-cycle context,2440.117,2444.117,False
+TEST,normal,N0332,0,5,0,0,0,0,0,0,0,No full-cycle context,2510.352,2510.752,False
+TEST,normal,N0337,0,23,0,0,0,0,0,0,3,No full-cycle context,2550.269,2552.469,False
+TEST,normal,N0342,0,36,0,0,0,0,0,10,0,Full-cycle context,2582.395,2585.895,False
+TEST,normal,N0347,0,41,0,0,0,0,0,0,0,Full-cycle context,2615.945,2619.945,False
+TEST,normal,N0357,0,11,0,0,0,0,2,0,0,No full-cycle context,2686.167,2687.167,False
+TEST,normal,N0362,0,25,0,0,0,0,0,0,0,Full-cycle context,2726.217,2728.617,False
+TEST,normal,N0367,0,28,0,0,0,0,0,0,0,Full-cycle context,2766.429,2769.129,False
+TEST,normal,N0372,0,41,0,0,0,0,0,2,0,Full-cycle context,2799.137,2803.137,False
+TEST,normal,N0377,0,41,0,0,0,0,0,0,2,Full-cycle context,2832.777,2836.777,False
+TEST,normal,N0387,0,8,0,0,0,0,0,0,0,No full-cycle context,2910.937,2911.637,False
+TEST,normal,N0392,0,16,0,0,0,0,0,0,0,No full-cycle context,2943.595,2945.095,False
+TEST,normal,N0397,0,23,0,0,0,0,3,5,0,Full-cycle context,2983.58,2985.78,False
+TEST,normal,N0402,0,25,0,0,0,0,0,0,0,Full-cycle context,3031.833,3034.233,False
+TEST,normal,N0407,0,29,0,0,0,0,0,0,1,Full-cycle context,3071.744,3074.544,False
+TEST,normal,N0412,0,31,0,0,0,0,0,0,2,Full-cycle context,3112.117,3115.117,False
+TEST,normal,N0417,0,41,0,0,0,0,0,0,0,Full-cycle context,3153.853,3157.853,False
+TEST,normal,N0422,0,41,0,0,0,11,7,0,5,Full-cycle context,3193.937,3197.937,False
+TEST,normal,N0427,0,41,0,0,0,0,0,1,0,Full-cycle context,3234.135,3238.135,False
+TEST,normal,N0432,0,2,0,0,0,0,0,0,0,No full-cycle context,3272.945,3273.045,False
+TEST,normal,N0437,0,1,0,0,0,0,1,0,0,No full-cycle context,3312.817,3312.817,False
+TEST,normal,N0447,0,12,0,0,0,0,1,1,0,No full-cycle context,3393.72,3394.82,False
+TEST,normal,N0452,0,15,0,0,0,0,0,0,0,No full-cycle context,3433.593,3434.993,False
+TEST,normal,N0457,0,18,0,0,0,0,0,0,0,No full-cycle context,3473.668,3475.368,False
+TEST,normal,N0462,0,25,0,0,0,0,0,0,0,No full-cycle context,3513.524,3515.924,False
+TEST,normal,N0467,0,40,0,0,0,0,5,5,0,Full-cycle context,3553.366,3557.266,False
+TEST,normal,N0472,0,41,0,0,0,0,0,0,0,Full-cycle context,3594.873,3598.873,False
+TEST,normal,N0477,0,41,0,0,0,0,0,0,0,Full-cycle context,3635.005,3639.005,False
+TEST,normal,N0482,0,41,0,0,0,0,0,0,0,Full-cycle context,3673.999,3677.999,False
+TEST,normal,N0487,0,26,0,0,0,0,0,0,0,Full-cycle context,3713.141,3715.641,False
+TEST,normal,N0492,0,41,0,0,0,0,0,6,0,Full-cycle context,3761.079,3765.079,False
+TEST,normal,N0497,0,41,0,0,0,0,0,0,0,Full-cycle context,3802.922,3806.922,False
+TEST,normal,N0502,0,2,0,0,0,0,0,0,0,No full-cycle context,3841.235,3841.335,False
+TEST,normal,N0507,0,18,0,0,0,0,0,0,0,No full-cycle context,3881.32,3883.02,False
+TEST,normal,N0512,0,17,0,0,0,0,0,0,0,No full-cycle context,3921.701,3923.301,False
+TEST,normal,N0517,0,16,0,0,0,0,0,0,0,No full-cycle context,3970.102,3971.602,False
+TEST,normal,N0522,0,16,0,0,0,0,0,0,0,No full-cycle context,4010.054,4011.554,False
+TEST,normal,N0527,0,27,0,0,0,0,0,0,0,No full-cycle context,4050.141,4052.741,False
+TEST,normal,N0532,0,41,0,0,0,0,0,0,0,Full-cycle context,4082.205,4086.205,False
+TEST,normal,N0537,0,41,0,0,0,0,0,0,0,Full-cycle context,4122.482,4126.482,False
+TEST,normal,N0542,0,41,0,0,0,0,0,0,0,Full-cycle context,4164.009,4168.009,False
+TEST,normal,N0552,0,22,0,0,0,0,0,0,0,No full-cycle context,4243.123,4245.223,False
+TEST,normal,N0557,0,36,0,0,0,0,0,0,0,Full-cycle context,4275.585,4279.085,False
+TEST,normal,N0562,0,41,0,0,0,0,0,5,1,Full-cycle context,4316.577,4320.577,False
+TEST,normal,N0567,0,41,0,0,0,0,1,0,0,Full-cycle context,4350.266,4354.266,False
+TEST,normal,N0572,0,11,0,0,0,0,0,0,0,No full-cycle context,4388.338,4389.338,False
+TEST,normal,N0577,0,26,0,0,0,0,0,0,0,No full-cycle context,4428.26,4430.76,False
+TEST,normal,N0582,0,41,0,0,0,0,0,2,0,Full-cycle context,4476.133,4480.133,False
+TEST,normal,N0587,0,41,0,0,0,0,0,0,0,Full-cycle context,4524.514,4528.514,False
+TEST,normal,N0592,0,41,0,0,0,0,6,0,0,Full-cycle context,4565.125,4569.125,False
+TEST,normal,N0597,0,41,0,0,0,0,0,0,0,Full-cycle context,4605.405,4609.405,False

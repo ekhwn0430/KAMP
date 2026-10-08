@@ -1,0 +1,12 @@
+﻿eval_set,operational_state,label,n_rows
+OOF,경보,0,8
+OOF,경보,1,298
+OOF,정상,0,11711
+OOF,주의,0,113
+OOF,주의,1,1
+TEST,경보,0,5
+TEST,경보,1,129
+TEST,정상,0,2995
+TEST,주의,0,39
+,평가불가,0,5128
+,평가불가,1,172

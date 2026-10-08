@@ -1,0 +1,5 @@
+﻿state,logical_condition,next_step,risk
+정상,evaluable and A_alarm=0 and B_alarm=0,정기 모니터링,정상 예측도 실제 설비 상태 확증 아님
+주의,evaluable and exactly one of A_alarm/B_alarm=1,"재관찰, 운전로그 비교, 센서 확인",주의만으로 부품 고장 확정 금지
+경보,evaluable and A_alarm=1 and B_alarm=1; k=1,우선점검/현장 담당자 확인,자동 정지/압력 변경 등 제어 미검증
+평가불가,segment 첫 9행 또는 유효 10 sample 부족,결측/수집 상태 확인 및 재확보,정상 처리 금지
