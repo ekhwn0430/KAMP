@@ -1,5 +1,26 @@
-# %%capture
-# %run "./5.EDA_0_Cycle.ipynb"
+# 04_Data_Processing/preprocess.py에서 만든 공식 전처리 데이터를 직접 불러온다. (01_Cycle.py와 같은 방식)
+from pathlib import Path
+import pandas as pd
+
+def find_data_path():
+    for root in [Path.cwd(), *Path.cwd().parents]:
+        for p in (root/"data"/"processed"/"preprocessed_data.csv", root/"data"/"preprocessed_data.csv"):
+            if p.exists():
+                return p
+    raise FileNotFoundError("data/(processed/)preprocessed_data.csv를 찾지 못함")
+
+DATA_PATH=find_data_path()
+data=pd.read_csv(DATA_PATH,parse_dates=["TimeStamp"])
+
+normal=data[data["source"]=="normal"].copy()
+outlier=data[data["source"]=="abnormal"].copy()
+
+# Cycle 검출 기준값 (01_Cycle.py / 05.EDA_0_Cycle.py와 동일)
+CHANNELS=["AI0_Vibration","AI1_Vibration","AI2_Current"]
+SAMPLE_RATE_HZ=10.0
+MIN_SEGMENT_ROWS=30
+CYCLE_ANCHOR="AI2_Current"
+CYCLE_MIN_PEAK_DISTANCE_SAMPLES=12
 
 
 required_objects = [
@@ -89,7 +110,7 @@ def detector_diagnostics(df, dataset_name):
 
         rows.append({
             "dataset": dataset_name,
-            "segment_id": int(segment_id),
+            "segment_id": segment_id,
             "n_samples": n_samples,
             "eligible": eligible,
             "prominence": prominence,
@@ -123,7 +144,7 @@ q1_summary = pd.DataFrame([
     eligibility_summary(outlier_diag).rename("Outlier"),
 ])
 
-display(q1_summary)
+print(q1_summary)
 
 print(
     f"Outlier 전체 segment : {len(outlier_diag)}"
@@ -153,9 +174,9 @@ q2_summary = (
     .to_frame()
 )
 
-display(q2_summary)
+print(q2_summary)
 
-display(
+print(
     outlier_eligible[
         [
             "segment_id",
@@ -180,7 +201,6 @@ import math
 
 eligible_ids = (
     outlier_eligible["segment_id"]
-    .astype(int)
     .tolist()
 )
 
@@ -304,7 +324,7 @@ def detect_with_fixed_prominence(
 
         rows.append({
             "dataset": dataset_name,
-            "segment_id": int(segment_id),
+            "segment_id": segment_id,
             "peak_count_fixed": len(peaks),
             "candidate_cycle_count_fixed":
                 max(len(peaks) - 1, 0),
@@ -352,7 +372,7 @@ adaptive_vs_fixed["peak_difference"] = (
     - adaptive_vs_fixed["peak_count_adaptive"]
 )
 
-display(adaptive_vs_fixed)
+print(adaptive_vs_fixed)
 
 print(
     "Adaptive total peaks:",
@@ -500,4 +520,4 @@ sensitivity = pd.concat(
     ignore_index=True,
 )
 
-display(sensitivity)
+print(sensitivity)

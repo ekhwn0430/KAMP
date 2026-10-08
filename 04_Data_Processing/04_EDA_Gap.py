@@ -12,8 +12,28 @@
 # 논리 구조 테이블
 
 
-# %%capture
-# %run "./5.EDA_0_Cycle.ipynb"
+# 04_Data_Processing/preprocess.py에서 만든 공식 전처리 데이터를 직접 불러온다. (01_Cycle.py와 같은 방식)
+from pathlib import Path
+import pandas as pd
+
+def find_data_path():
+    for root in [Path.cwd(), *Path.cwd().parents]:
+        for p in (root/"data"/"processed"/"preprocessed_data.csv", root/"data"/"preprocessed_data.csv"):
+            if p.exists():
+                return p
+    raise FileNotFoundError("data/(processed/)preprocessed_data.csv를 찾지 못함")
+
+DATA_PATH=find_data_path()
+data=pd.read_csv(DATA_PATH,parse_dates=["TimeStamp"])
+
+normal=data[data["source"]=="normal"].copy()
+outlier=data[data["source"]=="abnormal"].copy()
+
+# Gap 판정 기준 (preprocess.py의 GAP_SEC와 동일)
+TIME_GAP_THRESHOLD_SEC=0.15
+for df in (normal, outlier):
+    df["is_nonincreasing"]=df["dt_sec"].le(0)
+    df["is_large_gap"]=df["dt_sec"].gt(TIME_GAP_THRESHOLD_SEC)
 
 
 required_objects = [
@@ -103,7 +123,7 @@ gap_interval_table = pd.DataFrame([
     gap_interval_summary(outlier, "outlier"),
 ])
 
-display(gap_interval_table)
+print(gap_interval_table)
 
 
 import matplotlib.pyplot as plt
@@ -185,7 +205,7 @@ threshold_table = pd.concat([
     threshold_sensitivity(outlier, "outlier"),
 ])
 
-display(threshold_table)
+print(threshold_table)
 
 
 # Q2. 특정 row/block 구조가 존재하는가?
@@ -225,7 +245,7 @@ segment_summary = pd.DataFrame([
     segment_length_summary(outlier, "outlier"),
 ])
 
-display(segment_summary)
+print(segment_summary)
 
 
 def segment_length_summary(df, name):
@@ -257,7 +277,7 @@ segment_summary = pd.DataFrame([
     segment_length_summary(outlier, "outlier"),
 ])
 
-display(segment_summary)
+print(segment_summary)
 
 
 ## segment 빈도
@@ -267,7 +287,7 @@ normal_segment_sizes = (
 )
 
 print("NORMAL segment length frequency")
-display(
+print(
     normal_segment_sizes
     .value_counts()
     .sort_index()
@@ -280,7 +300,7 @@ outlier_segment_sizes = (
 )
 
 print("OUTLIER segment length frequency")
-display(
+print(
     outlier_segment_sizes
     .value_counts()
     .sort_index()
@@ -336,7 +356,7 @@ gap_row_table = pd.DataFrame([
     gap_row_distance_summary(outlier, "outlier"),
 ])
 
-display(gap_row_table)
+print(gap_row_table)
 
 # 빈도
 normal_gap_rows = normal.loc[
@@ -348,7 +368,7 @@ normal_gap_dist = pd.Series(
     np.diff(normal_gap_rows)
 )
 
-display(
+print(
     normal_gap_dist
     .value_counts()
     .head(20)
@@ -367,7 +387,7 @@ normal_gap_position["row_mod_50"] = (
     normal_gap_position["source_row"] % 50
 )
 
-display(
+print(
     normal_gap_position["row_mod_50"]
     .value_counts()
     .sort_index()

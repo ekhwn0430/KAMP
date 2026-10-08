@@ -402,28 +402,16 @@ def main(window=10, stride=1, spectral=False, verbose=True):
 
 
 if __name__ == "__main__":
-    try:
-        # 일반 .py 실행
-        get_ipython
-    except NameError:
-        ap = argparse.ArgumentParser()
-        ap.add_argument("--window", type=int, default=10)
-        ap.add_argument("--stride", type=int, default=1)
-        ap.add_argument(
-            "--spectral",
-            action="store_true",
-            help="FFT 특징 포함 (기본 제외)"
-        )
-        a = ap.parse_args()
-        main(a.window, a.stride, a.spectral)
-
-    else:
-        # Jupyter 실행
-        data, feats = main(
-            window=10,
-            stride=1,
-            spectral=False
-        )
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--window", type=int, default=10)
+    ap.add_argument("--stride", type=int, default=1)
+    ap.add_argument(
+        "--spectral",
+        action="store_true",
+        help="FFT 특징 포함 (기본 제외)"
+    )
+    a = ap.parse_args()
+    main(a.window, a.stride, a.spectral)
 
 
 """
@@ -469,8 +457,9 @@ def feature_sets(cols):
     cur_time = ["cur_ac1", "cur_ac2", "cur_ac3", "cur_mcr", "cur_diffstd"]
     vib = [c for c in cols if c.startswith(("v0_", "v1_"))]
     cur_mag = [c for c in cols if c.startswith("cur_") and c not in cur_time]
-    rel = ["corr_v0_v1", "corr_v0_cur", "corr_v1_cur",
-           "rms_diff_v0_v1", "rms_ratio_v0_v1"]
+    rel = ["corr_v0_v1",
+        "corr_v0_cur", "corr_v1_cur",
+        "rms_diff_v0_v1", "rms_ratio_v0_v1"]
     base = vib + cur_mag + rel
 
     return {

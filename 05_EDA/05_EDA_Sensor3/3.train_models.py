@@ -10,7 +10,7 @@
 비교 축
 - 모델: RMS-IQR 규칙(팀 베이스라인), 로지스틱회귀, 랜덤포레스트, HistGradientBoosting(LightGBM 방식), IsolationForest(정상만 학습)
 - 특징 세트: F1 진동 -> F2 +전류 크기 -> F3 +채널 관계 -> F4 +H1 잔차 -> F5 +전류 시간구조
-  F5는 수집조건 차이(날짜) 혼입 가능성이 있어 최종 모델 선정에서 제외하고 참고용으로만 보고
+F5는 수집조건 차이(날짜) 혼입 가능성이 있어 최종 모델 선정에서 제외하고 참고용으로만 보고
 
 실행:  python train_models.py
 출력:  results/models/cv_results.csv, test_results.csv, test_predictions.csv
@@ -27,6 +27,12 @@ from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+# preprocess.py는 04_Data_Processing 폴더에 있으므로 import 경로에 추가한다.
+import sys
+try: _here = Path(__file__).resolve().parent
+except NameError: _here = Path.cwd()
+_root = next(p for p in [_here, *_here.parents] if (p / "04_Data_Processing" / "preprocess.py").exists())
+sys.path.insert(0, str(_root / "04_Data_Processing"))
 from preprocess import load_and_clean, make_features, feature_cols
 
 ROOT = Path(__file__).resolve().parent
@@ -104,11 +110,19 @@ class NormalOnlyIForest(BaseEstimator, ClassifierMixin):
 
 MODELS = {
     "LogReg": make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", max_iter=3000)),
-    "RandomForest": RandomForestClassifier(n_estimators=300, min_samples_leaf=5, class_weight="balanced_subsample",
-                                           n_jobs=-1, random_state=SEED),
-    "HistGB": HistGradientBoostingClassifier(max_iter=300, learning_rate=0.05, max_leaf_nodes=15,
-                                             class_weight="balanced", random_state=SEED),
-    "IsolationForest": NormalOnlyIForest(),
+    "RandomForest": RandomForestClassifier(n_estimators=300,
+                                        min_samples_leaf=5,
+                                        class_weight="balanced_subsample",
+                                        n_jobs=-1,
+                                        random_state=SEED
+                                        ),
+    "HistGB": HistGradientBoostingClassifier(max_iter=300,
+                                            learning_rate=0.05,
+                                            max_leaf_nodes=15,
+                                            class_weight="balanced",
+                                            random_state=SEED
+                                            ),
+    "IsolationForest": NormalOnlyIForest()
 }
 
 

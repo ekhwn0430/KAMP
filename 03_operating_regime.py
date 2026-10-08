@@ -188,7 +188,7 @@ for segment_id,group in normal.groupby("segment_id",sort=False):
 segment_stats=pd.DataFrame(segment_rows)
 
 print("Segment-level rows :",len(segment_stats))
-display(segment_stats.head())
+print(segment_stats.head())
 
 # %%
 # 각 Normal segment의 RMS가 시간에 따라 어떻게 변하는지 채널별로 확인한다.
@@ -240,7 +240,7 @@ rms_bin=(
     .reset_index()
 )
 
-display(rms_bin)
+print(rms_bin)
 
 for channel in CHANNELS:
     fig,ax=plt.subplots(figsize=(13,4))
@@ -334,7 +334,7 @@ period_compare=(
     )
 )
 
-display(period_compare)
+print(period_compare)
 
 # %%
 # Low-RMS 후보와 나머지 Normal의 신호 amplitude 특성을 직접 비교한다.
@@ -373,7 +373,7 @@ for channel in CHANNELS:
 
 amplitude_compare=pd.DataFrame(metrics)
 
-display(amplitude_compare)
+print(amplitude_compare)
 
 # %%
 # Low-RMS 후보와 Other Normal의 AI2 반복파형 shape를 amplitude와 분리하여 비교한다.
@@ -673,7 +673,7 @@ for channel in SHAPE_CHANNELS:
 
 shape_compare=pd.DataFrame(shape_summary)
 
-display(shape_compare)
+print(shape_compare)
 
 # %%
 # 각 Regime 내부에서 Cycle들이 자기 Regime Median Template과 얼마나 유사한지 확인한다.
@@ -714,6 +714,6 @@ for channel in SHAPE_CHANNELS:
 
 shape_consistency=pd.DataFrame(consistency_rows)
 
-display(shape_consistency)
+print(shape_consistency)
 
 

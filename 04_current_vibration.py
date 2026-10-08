@@ -1,4 +1,4 @@
-# %%
+
 # AI2로 추출한 정상 Cycle 전체에서 AI0/AI1 진동 응답을 분석한다.
 # Cycle별 RMS, STD, PTP의 분포와 시간에 따른 변화를 확인한다.
 # AI2 Current 수준과 AI0/AI1 진동 크기의 관계도 함께 확인한다.
@@ -7,6 +7,105 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+# 04_Data_Processing/preprocess.py에서 만든 공식 전처리 데이터를 직접 불러온다. (01_Cycle.py와 같은 방식)
+from pathlib import Path
+import pandas as pd
+
+def find_data_path():
+    for root in [Path.cwd(), *Path.cwd().parents]:
+        for p in (root/"data"/"processed"/"preprocessed_data.csv", root/"data"/"preprocessed_data.csv"):
+            if p.exists():
+                return p
+    raise FileNotFoundError("data/(processed/)preprocessed_data.csv를 찾지 못함")
+
+DATA_PATH=find_data_path()
+data=pd.read_csv(DATA_PATH,parse_dates=["TimeStamp"])
+
+normal=data[data["source"]=="normal"].copy()
+outlier=data[data["source"]=="abnormal"].copy()
+
+# 01_Cycle.py / 03_operating_regime.py와 동일한 기준값
+MIN_SEGMENT_ROWS=30
+MIN_PEAK_DISTANCE=12
+
+# 01_Cycle.py와 동일한 AI2 Peak-to-Peak 기준으로 Normal cycle을 재생성한다.
+# cycle_features는 cycle별 통계 Feature Table, cycle_bounds는 normal의 행 경계(index) Table이다.
+# 중복행 제거로 normal의 index와 source_row가 후반부에서 달라지므로 실제 index를 따로 저장한다.
+from scipy.signal import find_peaks
+
+CHANNELS=["AI0_Vibration","AI1_Vibration","AI2_Current"]
+CYCLE_ANCHOR="AI2_Current"
+CYCLE_MIN_PEAK_DISTANCE_SAMPLES=12
+
+cycle_records=[]
+bounds_records=[]
+
+for segment_id,group in normal.groupby("segment_id",sort=False):
+    if len(group)<MIN_SEGMENT_ROWS:
+        continue
+
+    anchor=group[CYCLE_ANCHOR].to_numpy(float)
+    smooth=pd.Series(anchor).rolling(3,center=True,min_periods=1).median().to_numpy()
+    prominence=max(float(np.std(smooth,ddof=1))*.5,np.finfo(float).eps)
+    peaks,_=find_peaks(
+        smooth,
+        distance=CYCLE_MIN_PEAK_DISTANCE_SAMPLES,
+        prominence=prominence
+    )
+
+    for cycle_id,(start,stop) in enumerate(zip(peaks[:-1],peaks[1:]),start=1):
+        if stop-start<CYCLE_MIN_PEAK_DISTANCE_SAMPLES:
+            continue
+
+        cycle=group.iloc[start:stop+1]
+        duration=float(cycle["elapsed_sec"].iloc[-1]-cycle["elapsed_sec"].iloc[0])
+        if duration<=0:
+            continue
+
+        record={
+            "segment_id":segment_id,
+            "cycle_number_in_segment":cycle_id,
+            "start_source_row":int(cycle["source_row"].iloc[0]),
+            "end_source_row":int(cycle["source_row"].iloc[-1]),
+            "duration_sec":duration,
+            "n_samples":len(cycle)
+        }
+
+        for channel in CHANNELS:
+            x=cycle[channel].to_numpy(float)
+            mean_square=float(np.mean(x**2))
+            rms=float(np.sqrt(mean_square))
+
+            record[f"{channel}_mean"]=float(np.mean(x))
+            record[f"{channel}_std"]=float(np.std(x,ddof=1))
+            record[f"{channel}_rms"]=rms
+            record[f"{channel}_peak_to_peak"]=float(np.ptp(x))
+            record[f"{channel}_mean_square"]=mean_square
+            record[f"{channel}_energy"]=float(np.sum(x**2))
+            record[f"{channel}_crest_factor"]=float(np.max(np.abs(x))/rms) if rms>0 else np.nan
+
+        cycle_records.append(record)
+        bounds_records.append({
+            "segment_id":segment_id,
+            "cycle_id":cycle_id,
+            "start_idx":int(cycle.index[0]),
+            "end_idx":int(cycle.index[-1]),
+            "start_source_row":int(cycle["source_row"].iloc[0]),
+            "end_source_row":int(cycle["source_row"].iloc[-1])
+        })
+
+cycle_features=pd.DataFrame(cycle_records)
+cycle_bounds=pd.DataFrame(bounds_records)
+
+if cycle_features.empty:
+    raise ValueError("Normal Cycle Candidate가 생성되지 않았습니다.")
+if len(cycle_features)!=len(cycle_bounds):
+    raise RuntimeError("cycle_features와 cycle_bounds 행 수가 일치하지 않습니다.")
+
+print("cycle_features:",cycle_features.shape)
+print("cycle_bounds:",cycle_bounds.shape)
+print("Cycle duration median:",cycle_features["duration_sec"].median())
 
 global_features = cycle_features.copy()
 
@@ -22,8 +121,8 @@ FEATURES = [
     "AI2_Current_rms",
     "AI0_Vibration_std",
     "AI1_Vibration_std",
-    "AI0_Vibration_ptp",
-    "AI1_Vibration_ptp",
+    "AI0_Vibration_peak_to_peak",
+    "AI1_Vibration_peak_to_peak",
 ]
 
 # 1. Global 요약 통계
@@ -34,7 +133,7 @@ summary = global_features[FEATURES].describe(
 summary["cv"] = summary["std"] / summary["mean"].abs()
 
 print("=== Global Cycle Response Summary ===")
-display(summary.round(6))
+print(summary.round(6))
 
 # 2. 핵심 관계 확인
 corr_pairs = {
@@ -151,7 +250,7 @@ plt.title("AI0 vs AI1 Cycle-level RMS")
 plt.grid(alpha=0.25)
 plt.show()
 
-# %%
+
 # Normal Cycle에서 AI2 RMS와 AI0/AI1 RMS의 Global 관계를 회귀로 정량화한다.
 # AI2 수준에서 기대되는 진동 RMS를 계산하고 실제값과의 Residual을 만든다.
 # Residual의 크기와 시간 변화를 통해 단순 진폭과 관계 이탈을 분리한다.
@@ -289,7 +388,7 @@ plt.legend()
 plt.grid(alpha=0.25)
 plt.show()
 
-# %%
+
 # Global Current-Vibration 관계가 Low-RMS Normal과 다른 Normal에서 같은지 비교한다.
 # 기존 3600~4300초 구간은 원인 미확정의 Low-RMS candidate로만 사용한다.
 # 각 regime별 AI2→AI0/AI1 회귀선, R², residual bias를 비교한다.
@@ -432,9 +531,9 @@ residual_summary = (
 )
 
 print("\n=== Global-model Residual by Regime ===")
-display(residual_summary.round(6))
+print(residual_summary.round(6))
 
-# %%
+
 # Low-RMS Normal이 AI2-Vibration 관계의 단순 offset인지 slope 변화인지 확인한다.
 # AI2만, AI2+Regime, AI2+Regime+Interaction 세 모델을 비교한다.
 # Low-RMS 내부 AI2 범위가 좁으므로 별도 회귀 slope를 직접 해석하지 않는다.
@@ -453,7 +552,7 @@ range_summary = (
     check.groupby("regime")["AI2_Current_rms"]
     .agg(["count", "min", "max", "mean", "std"])
 )
-display(range_summary.round(4))
+print(range_summary.round(4))
 
 def compare_models(df, y_col):
     y = df[y_col].to_numpy()
@@ -550,7 +649,7 @@ for channel in ["AI0", "AI1"]:
         f"Cohen d={effect_size:.3f}"
     )
 
-# %%
+
 # AI2 Peak-to-Peak Cycle을 상대시간 기준 A/B/C 3개 Phase로 나눈다.
 # 각 Phase에서 AI0/AI1 진동의 RMS, STD, PTP, 평균절대값을 계산한다.
 # 전체 Cycle RMS로 나눈 relative RMS도 만들어 amplitude와 phase 구조를 분리한다.
@@ -657,7 +756,7 @@ for channel in ["AI0_Vibration", "AI1_Vibration"]:
     )
 
     print(f"\n=== {channel} Phase Summary ===")
-    display(summary.round(6))
+    print(summary.round(6))
 
     med = summary["ratio_median"]
     print(
@@ -747,7 +846,7 @@ plt.title("AI1 Relative RMS by Cycle Phase")
 plt.grid(alpha=0.25)
 plt.show()
 
-# %%
+
 # A/B/C Phase의 RMS 차이가 실제로 반복되는 구조인지 정량적으로 검증한다.
 # AI0/AI1뿐 아니라 AI2도 같이 비교해 균등 3분할 자체의 의미를 확인한다.
 # p-value보다 Kendall's W와 최대 Phase 비율을 중심으로 효과 크기를 판단한다.
@@ -844,10 +943,8 @@ for channel in [
         .astype(str) + "%"
     )
 
-# %% [markdown]
-# ## 3페이즈 균등 분리는 폐기
 
-# %%
+# ## 3페이즈 균등 분리는 폐기
 # 정상 AI2 Cycle을 상대위상 기준으로 정렬해 대표 Cycle Template을 만든다.
 # Cycle마다 amplitude 차이를 제거한 뒤 반복되는 AI2 shape 자체를 비교한다.
 # Template에서 최대/최소 및 가장 큰 상승·하강 변화구간을 Landmark로 추출한다.
@@ -959,7 +1056,7 @@ print(f"Cycles used      : {len(ai2_cycles_norm)}")
 print(f"Phase grid points: {N_PHASE_POINTS}")
 
 print("\n=== AI2 Landmarks ===")
-display(landmarks.round(4))
+print(landmarks.round(4))
 
 # -------------------------------------------------
 # 1. Normalized AI2 Cycle Template
@@ -1081,7 +1178,7 @@ plt.legend()
 plt.grid(alpha=0.25)
 plt.show()
 
-# %%
+
 # AI2 template의 Max Fall, Minimum, Max Rise 주변에서 AI0/AI1 국소 진동을 측정한다.
 # 보간된 진동값은 사용하지 않고 각 Cycle의 실제 저장 샘플에서 ±1 sample window를 사용한다.
 # Local RMS를 Whole-cycle RMS로 나눠 특정 AI2 transition 주변에 진동이 집중되는지 확인한다.
@@ -1174,7 +1271,7 @@ for channel in ["AI0_Vibration", "AI1_Vibration"]:
     )
 
     print(f"\n=== {channel} Landmark RMS Ratio ===")
-    display(summary.round(4))
+    print(summary.round(4))
 
     pivot = (
         landmark_features.pivot_table(
@@ -1260,7 +1357,7 @@ for channel in ["AI0_Vibration", "AI1_Vibration"]:
     print(f"\n{channel} median Local PTP")
     print(ptp_summary.round(6))
 
-# %%
+
 # AI2 Current의 영향을 제거한 뒤 AI0/AI1 진동 사이에 공통 Mechanical Response가 남는지 확인한다.
 # AI0/AI1 residual correlation을 계산해 Current와 독립적인 채널 coupling을 분석한다.
 # 두 진동 RMS의 log-ratio를 Channel Balance feature로 만들어 시간과 regime 변화를 확인한다.
@@ -1361,7 +1458,7 @@ balance_summary = (
 )
 
 print("\n=== AI0 / AI1 Channel Balance ===")
-display(balance_summary.round(4))
+print(balance_summary.round(4))
 
 # --------------------------------------------------
 # 4. Residual coupling scatter
@@ -1444,7 +1541,7 @@ plt.title("Mechanical Channel Balance by Normal Regime")
 plt.grid(alpha=0.25)
 plt.show()
 
-# %%
+
 # Global AI2-Vibration 관계가 시간대별 regime 이동 때문인지 cycle-level coupling인지 분리한다.
 # 300초 블록별 상관관계를 계산하고 각 블록 평균을 제거한 centered correlation도 구한다.
 # AI2-AI0, AI2-AI1 관계가 Normal 내부에서도 반복적으로 유지되는지 확인한다.
@@ -1500,7 +1597,7 @@ bin_summary = bin_summary[
 ]
 
 print("=== 300 s Within-Regime Correlations ===")
-display(bin_summary.round(4))
+print(bin_summary.round(4))
 
 # 블록 평균 제거
 for col in [
@@ -1604,7 +1701,7 @@ plt.legend()
 plt.grid(alpha=0.25)
 plt.show()
 
-# %%
+
 # Abnormal full-cycle을 Normal 기준으로 추출하고 RMS/residual을 계산한다.
 # Normal의 AI2→AI0/AI1 관계는 고정해서 사용한다.
 # 짧은 segment는 이후 Local Form 분석 대상으로 남긴다.
@@ -1665,7 +1762,7 @@ if len(abnormal_cycles):
     cols = ["segment_id", "cycle_id", "duration_sec", "AI2_Current_rms",
             "AI0_Vibration_rms", "AI1_Vibration_rms",
             "AI0_residual", "AI1_residual", "vib_log_ratio"]
-    display(abnormal_cycles[cols].round(6))
+    print(abnormal_cycles[cols].round(6))
 
     x_line = np.linspace(
         global_features["AI2_Current_rms"].min(),
@@ -1691,7 +1788,7 @@ if len(abnormal_cycles):
 else:
     print("완전한 Abnormal Cycle 없음 → Local Form 분석으로 이동")
 
-# %%
+
 # Abnormal full-cycle을 Timing, AI2 range, AI0/AI1 coupling 축으로 정량화한다.
 # Normal residual 분포로 z-score를 만들고 regression extrapolation 여부를 구분한다.
 # Normal 범위 밖 AI2는 residual보다 operating-intensity anomaly로 우선 해석한다.
@@ -1751,7 +1848,7 @@ print(f"AI0 residual SD: {r0_sd:.5f}")
 print(f"AI1 residual SD: {r1_sd:.5f}")
 
 print("\n=== Abnormal Full-Cycle Failure Axes ===")
-display(ab[cols].round(3))
+print(ab[cols].round(3))
 
 print("\n=== Failure Count ===")
 print(f"Timing break      : {(~ab['duration_normal']).sum()} / {len(ab)}")
@@ -1760,7 +1857,7 @@ print(f"AI0 coupling break: {ab['AI0_coupling_break'].sum()} / {len(ab)}")
 print(f"AI1 coupling break: {ab['AI1_coupling_break'].sum()} / {len(ab)}")
 print(f"Balance break     : {ab['balance_break'].sum()} / {len(ab)}")
 
-# %%
+
 # Timing float 오차를 수정하고 Abnormal full-cycle 이상축을 다시 분류한다.
 # AI2가 Normal 범위 안일 때만 Current-Vibration coupling break를 판정한다.
 # AI2 범위 밖은 coupling anomaly가 아니라 Operating-state OOD로 우선 분류한다.
@@ -1805,7 +1902,7 @@ cols = [
     "balance_break", "broken_axes"
 ]
 
-display(ab[cols].round(3))
+print(ab[cols].round(3))
 
 valid = ab[~ab["ai2_ood"]]
 
@@ -1817,7 +1914,7 @@ print(f"AI0 coupling break : {valid['AI0_coupling_break'].sum()} / {len(valid)}"
 print(f"AI1 coupling break : {valid['AI1_coupling_break'].sum()} / {len(valid)}")
 print(f"Balance break      : {ab['balance_break'].sum()} / {len(ab)}")
 
-# %%
+
 # Normal AI2 Cycle로 5-sample Local Phase Template 13개를 만든다.
 # 각 local window는 whole-cycle z-normalization 상태에서 비교한다.
 # Phase별 median template과 Normal 내부 RMSE 분포를 계산한다.
@@ -1861,7 +1958,7 @@ local_summary = local_ref.groupby("local_phase").agg(
 print("=== Normal Local Phase Dictionary ===")
 print(f"Local length : {LOCAL_LEN} samples")
 print(f"Templates    : {n_local}")
-display(local_summary.round(4))
+print(local_summary.round(4))
 
 plt.figure(figsize=(10, 5))
 plt.plot(local_summary.index, local_summary["rmse_med"],
@@ -1887,7 +1984,7 @@ plt.legend()
 plt.grid(alpha=.25)
 plt.show()
 
-# %%
+
 # Normal 5-sample AI2 Local Shape Dictionary를 만들고 Partial Abnormal에 적용한다.
 # 각 5-sample window는 local z-normalization 후 Normal 13개 phase template과 비교한다.
 # Normal best-match RMSE 95%를 기준으로 Abnormal local-shape deviation을 표시한다.
@@ -1960,7 +2057,7 @@ summary = local_ab.groupby("segment_id").agg(
 ).sort_values("bad_rmse_frac", ascending=False)
 
 print("\n=== Partial Abnormal Local-form Summary ===")
-display(summary.round(4))
+print(summary.round(4))
 
 plt.figure(figsize=(10, 5))
 plt.bar(summary.index, summary["bad_rmse_frac"])
@@ -1972,7 +2069,7 @@ plt.legend()
 plt.grid(axis="y", alpha=.25)
 plt.show()
 
-# %%
+
 # Normal segment를 Train/Holdout으로 분리해 Local Form 기준의 과적합을 검사한다.
 # Train Normal만으로 5-sample template을 만들고 Holdout Normal로 95% RMSE를 정한다.
 # 그 threshold를 Partial Abnormal에 그대로 적용한다.
@@ -2029,13 +2126,13 @@ print(f"Train segments     : {len(train_seg)}")
 print(f"Validation segments: {len(val_seg)}")
 print(f"Holdout RMSE 95%   : {RMSE_THR_HOLDOUT:.4f}")
 print(f"Partial evaluable  : {len(holdout_result)}")
-display(holdout_result.sort_values("bad_frac", ascending=False).round(4))
+print(holdout_result.sort_values("bad_frac", ascending=False).round(4))
 
 all_partial = set(partial["segment_id"].unique())
 evaluated = set(holdout_result.index)
 print("Too short (<5 samples):", sorted(all_partial-evaluated))
 
-# %%
+
 # Train Normal로 17개 cyclic Local Phase Template을 만든다.
 # Holdout Normal에서 정상적인 phase progression 기준을 구한다.
 # Partial Abnormal의 best phase가 +1 방향으로 진행하는지 비교한다.
@@ -2111,7 +2208,7 @@ for seg_id, g in partial.groupby("segment_id", sort=False):
 progression_result = pd.DataFrame(rows).set_index("segment_id")
 
 print("\n=== Partial Abnormal Local Phase Progression ===")
-display(
+print(
     progression_result
     .sort_values("bad_shape_frac", ascending=False)
     .round(4)
@@ -2132,7 +2229,7 @@ plt.legend()
 plt.grid(alpha=.25)
 plt.show()
 
-# %%
+
 # Holdout Normal에서 Cycle별 bad Local Shape 비율의 정상 범위를 계산한다.
 # Window RMSE threshold는 기존 CYCLIC_RMSE_THR을 그대로 사용한다.
 # Normal Cycle별 bad fraction 95%를 Partial Abnormal 판정기준으로 고정한다.
@@ -2173,10 +2270,15 @@ print(f"Normal bad-frac 95% : {BAD_FRAC_THR:.4f}")
 print(f"Normal progression 5%: {PROG_THR_FINAL:.4f}")
 
 print("\n=== Partial Abnormal Final Classification ===")
-display(
+print(
     progression_result[
-        ["n_windows", "rmse_med", "bad_shape_frac",
-         "shape_break", "progression_ok", "progression_break"]
+        ["n_windows",
+        "rmse_med",
+        "bad_shape_frac",
+        "shape_break",
+        "progression_ok",
+        "progression_break"
+        ]
     ].round(4)
 )
 
@@ -2192,7 +2294,7 @@ print(
     f"{len(progression_result)}"
 )
 
-# %%
+
 # Abnormal 21개 segment를 Full / Partial / Too-short Branch로 통합한다.
 # Break / 정상 / N-A를 서로 다른 상태로 표시해 오해를 막는다.
 # Global Cycle, Local Form, Coverage 축을 시각적으로 구분한다.

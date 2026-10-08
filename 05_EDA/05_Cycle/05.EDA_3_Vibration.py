@@ -7,6 +7,105 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+# 04_Data_Processing/preprocess.py에서 만든 공식 전처리 데이터를 직접 불러온다. (01_Cycle.py와 같은 방식)
+from pathlib import Path
+import pandas as pd
+
+def find_data_path():
+    for root in [Path.cwd(), *Path.cwd().parents]:
+        for p in (root/"data"/"processed"/"preprocessed_data.csv", root/"data"/"preprocessed_data.csv"):
+            if p.exists():
+                return p
+    raise FileNotFoundError("data/(processed/)preprocessed_data.csv를 찾지 못함")
+
+DATA_PATH=find_data_path()
+data=pd.read_csv(DATA_PATH,parse_dates=["TimeStamp"])
+
+normal=data[data["source"]=="normal"].copy()
+outlier=data[data["source"]=="abnormal"].copy()
+
+# 01_Cycle.py / 03_operating_regime.py와 동일한 기준값
+MIN_SEGMENT_ROWS=30
+MIN_PEAK_DISTANCE=12
+
+# 01_Cycle.py와 동일한 AI2 Peak-to-Peak 기준으로 Normal cycle을 재생성한다.
+# cycle_features는 cycle별 통계 Feature Table, cycle_bounds는 normal의 행 경계(index) Table이다.
+# 중복행 제거로 normal의 index와 source_row가 후반부에서 달라지므로 실제 index를 따로 저장한다.
+from scipy.signal import find_peaks
+
+CHANNELS=["AI0_Vibration","AI1_Vibration","AI2_Current"]
+CYCLE_ANCHOR="AI2_Current"
+CYCLE_MIN_PEAK_DISTANCE_SAMPLES=12
+
+cycle_records=[]
+bounds_records=[]
+
+for segment_id,group in normal.groupby("segment_id",sort=False):
+    if len(group)<MIN_SEGMENT_ROWS:
+        continue
+
+    anchor=group[CYCLE_ANCHOR].to_numpy(float)
+    smooth=pd.Series(anchor).rolling(3,center=True,min_periods=1).median().to_numpy()
+    prominence=max(float(np.std(smooth,ddof=1))*.5,np.finfo(float).eps)
+    peaks,_=find_peaks(
+        smooth,
+        distance=CYCLE_MIN_PEAK_DISTANCE_SAMPLES,
+        prominence=prominence
+    )
+
+    for cycle_id,(start,stop) in enumerate(zip(peaks[:-1],peaks[1:]),start=1):
+        if stop-start<CYCLE_MIN_PEAK_DISTANCE_SAMPLES:
+            continue
+
+        cycle=group.iloc[start:stop+1]
+        duration=float(cycle["elapsed_sec"].iloc[-1]-cycle["elapsed_sec"].iloc[0])
+        if duration<=0:
+            continue
+
+        record={
+            "segment_id":segment_id,
+            "cycle_number_in_segment":cycle_id,
+            "start_source_row":int(cycle["source_row"].iloc[0]),
+            "end_source_row":int(cycle["source_row"].iloc[-1]),
+            "duration_sec":duration,
+            "n_samples":len(cycle)
+        }
+
+        for channel in CHANNELS:
+            x=cycle[channel].to_numpy(float)
+            mean_square=float(np.mean(x**2))
+            rms=float(np.sqrt(mean_square))
+
+            record[f"{channel}_mean"]=float(np.mean(x))
+            record[f"{channel}_std"]=float(np.std(x,ddof=1))
+            record[f"{channel}_rms"]=rms
+            record[f"{channel}_peak_to_peak"]=float(np.ptp(x))
+            record[f"{channel}_mean_square"]=mean_square
+            record[f"{channel}_energy"]=float(np.sum(x**2))
+            record[f"{channel}_crest_factor"]=float(np.max(np.abs(x))/rms) if rms>0 else np.nan
+
+        cycle_records.append(record)
+        bounds_records.append({
+            "segment_id":segment_id,
+            "cycle_id":cycle_id,
+            "start_idx":int(cycle.index[0]),
+            "end_idx":int(cycle.index[-1]),
+            "start_source_row":int(cycle["source_row"].iloc[0]),
+            "end_source_row":int(cycle["source_row"].iloc[-1])
+        })
+
+cycle_features=pd.DataFrame(cycle_records)
+cycle_bounds=pd.DataFrame(bounds_records)
+
+if cycle_features.empty:
+    raise ValueError("Normal Cycle Candidate가 생성되지 않았습니다.")
+if len(cycle_features)!=len(cycle_bounds):
+    raise RuntimeError("cycle_features와 cycle_bounds 행 수가 일치하지 않습니다.")
+
+print("cycle_features:",cycle_features.shape)
+print("cycle_bounds:",cycle_bounds.shape)
+print("Cycle duration median:",cycle_features["duration_sec"].median())
+
 global_features = cycle_features.copy()
 
 # Cycle 시작 시점을 실제 Normal elapsed time으로 연결
@@ -21,8 +120,8 @@ FEATURES = [
     "AI2_Current_rms",
     "AI0_Vibration_std",
     "AI1_Vibration_std",
-    "AI0_Vibration_ptp",
-    "AI1_Vibration_ptp",
+    "AI0_Vibration_peak_to_peak",
+    "AI1_Vibration_peak_to_peak",
 ]
 
 # 1. Global 요약 통계
@@ -33,7 +132,7 @@ summary = global_features[FEATURES].describe(
 summary["cv"] = summary["std"] / summary["mean"].abs()
 
 print("=== Global Cycle Response Summary ===")
-display(summary.round(6))
+print(summary.round(6))
 
 # 2. 핵심 관계 확인
 corr_pairs = {
@@ -431,7 +530,7 @@ residual_summary = (
 )
 
 print("\n=== Global-model Residual by Regime ===")
-display(residual_summary.round(6))
+print(residual_summary.round(6))
 
 
 # Low-RMS Normal이 AI2-Vibration 관계의 단순 offset인지 slope 변화인지 확인한다.
@@ -452,7 +551,7 @@ range_summary = (
     check.groupby("regime")["AI2_Current_rms"]
     .agg(["count", "min", "max", "mean", "std"])
 )
-display(range_summary.round(4))
+print(range_summary.round(4))
 
 def compare_models(df, y_col):
     y = df[y_col].to_numpy()
@@ -656,7 +755,7 @@ for channel in ["AI0_Vibration", "AI1_Vibration"]:
     )
 
     print(f"\n=== {channel} Phase Summary ===")
-    display(summary.round(6))
+    print(summary.round(6))
 
     med = summary["ratio_median"]
     print(
@@ -955,7 +1054,7 @@ print(f"Cycles used      : {len(ai2_cycles_norm)}")
 print(f"Phase grid points: {N_PHASE_POINTS}")
 
 print("\n=== AI2 Landmarks ===")
-display(landmarks.round(4))
+print(landmarks.round(4))
 
 # -------------------------------------------------
 # 1. Normalized AI2 Cycle Template
@@ -1170,7 +1269,7 @@ for channel in ["AI0_Vibration", "AI1_Vibration"]:
     )
 
     print(f"\n=== {channel} Landmark RMS Ratio ===")
-    display(summary.round(4))
+    print(summary.round(4))
 
     pivot = (
         landmark_features.pivot_table(
@@ -1357,7 +1456,7 @@ balance_summary = (
 )
 
 print("\n=== AI0 / AI1 Channel Balance ===")
-display(balance_summary.round(4))
+print(balance_summary.round(4))
 
 # --------------------------------------------------
 # 4. Residual coupling scatter
@@ -1496,7 +1595,7 @@ bin_summary = bin_summary[
 ]
 
 print("=== 300 s Within-Regime Correlations ===")
-display(bin_summary.round(4))
+print(bin_summary.round(4))
 
 # 블록 평균 제거
 for col in [
@@ -1661,7 +1760,7 @@ if len(abnormal_cycles):
     cols = ["segment_id", "cycle_id", "duration_sec", "AI2_Current_rms",
             "AI0_Vibration_rms", "AI1_Vibration_rms",
             "AI0_residual", "AI1_residual", "vib_log_ratio"]
-    display(abnormal_cycles[cols].round(6))
+    print(abnormal_cycles[cols].round(6))
 
     x_line = np.linspace(
         global_features["AI2_Current_rms"].min(),
@@ -1747,7 +1846,7 @@ print(f"AI0 residual SD: {r0_sd:.5f}")
 print(f"AI1 residual SD: {r1_sd:.5f}")
 
 print("\n=== Abnormal Full-Cycle Failure Axes ===")
-display(ab[cols].round(3))
+print(ab[cols].round(3))
 
 print("\n=== Failure Count ===")
 print(f"Timing break      : {(~ab['duration_normal']).sum()} / {len(ab)}")
@@ -1801,7 +1900,7 @@ cols = [
     "balance_break", "broken_axes"
 ]
 
-display(ab[cols].round(3))
+print(ab[cols].round(3))
 
 valid = ab[~ab["ai2_ood"]]
 
@@ -1857,7 +1956,7 @@ local_summary = local_ref.groupby("local_phase").agg(
 print("=== Normal Local Phase Dictionary ===")
 print(f"Local length : {LOCAL_LEN} samples")
 print(f"Templates    : {n_local}")
-display(local_summary.round(4))
+print(local_summary.round(4))
 
 plt.figure(figsize=(10, 5))
 plt.plot(local_summary.index, local_summary["rmse_med"],
@@ -1956,7 +2055,7 @@ summary = local_ab.groupby("segment_id").agg(
 ).sort_values("bad_rmse_frac", ascending=False)
 
 print("\n=== Partial Abnormal Local-form Summary ===")
-display(summary.round(4))
+print(summary.round(4))
 
 plt.figure(figsize=(10, 5))
 plt.bar(summary.index, summary["bad_rmse_frac"])
@@ -2025,7 +2124,7 @@ print(f"Train segments     : {len(train_seg)}")
 print(f"Validation segments: {len(val_seg)}")
 print(f"Holdout RMSE 95%   : {RMSE_THR_HOLDOUT:.4f}")
 print(f"Partial evaluable  : {len(holdout_result)}")
-display(holdout_result.sort_values("bad_frac", ascending=False).round(4))
+print(holdout_result.sort_values("bad_frac", ascending=False).round(4))
 
 all_partial = set(partial["segment_id"].unique())
 evaluated = set(holdout_result.index)
@@ -2107,7 +2206,7 @@ for seg_id, g in partial.groupby("segment_id", sort=False):
 progression_result = pd.DataFrame(rows).set_index("segment_id")
 
 print("\n=== Partial Abnormal Local Phase Progression ===")
-display(
+print(
     progression_result
     .sort_values("bad_shape_frac", ascending=False)
     .round(4)
@@ -2169,10 +2268,10 @@ print(f"Normal bad-frac 95% : {BAD_FRAC_THR:.4f}")
 print(f"Normal progression 5%: {PROG_THR_FINAL:.4f}")
 
 print("\n=== Partial Abnormal Final Classification ===")
-display(
+print(
     progression_result[
         ["n_windows", "rmse_med", "bad_shape_frac",
-         "shape_break", "progression_ok", "progression_break"]
+        "shape_break", "progression_ok", "progression_break"]
     ].round(4)
 )
 

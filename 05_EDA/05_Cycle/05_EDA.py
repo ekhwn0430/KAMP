@@ -93,7 +93,7 @@ print(f"RMS not eval   : {(~abnormal.RMS_evaluable).sum():,}")
 print(f"RMS detected   : {abnormal.RMS_outlier.sum():,}")
 print(f"RMS missed     : {abnormal.RMS_normal.sum():,}")
 
-display(bounds.round(4))
+print(bounds.round(4))
 
 
 # 5. 공식 segment 단위 요약
@@ -110,7 +110,7 @@ segment_summary = (
     )
 )
 
-display(segment_summary.describe().round(3))
+print(segment_summary.describe().round(3))
 
 
 # 6. Normal에서 RMS 정상/이상 상태
@@ -143,4 +143,4 @@ plt.tight_layout()
 plt.show()
 
 # 9. 센서 상관관계
-display(normal[SIGNALS].corr().round(3))
+print(normal[SIGNALS].corr().round(3))

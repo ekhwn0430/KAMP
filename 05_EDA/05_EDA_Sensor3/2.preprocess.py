@@ -3,9 +3,9 @@
 
 실행: python preprocess.py --window 10 --stride 1 [--spectral]
 출력: data/processed/clean_timeseries.csv
-      data/processed/features_w{W}.csv
-      data/processed/excluded_segments_w{W}.csv
-      data/processed/diagnosis.json
+    data/processed/features_w{W}.csv
+    data/processed/excluded_segments_w{W}.csv
+    data/processed/diagnosis.json
 
 규칙
 - 원본 행 순서 유지, TimeStamp 기준 정렬 금지
@@ -28,8 +28,16 @@ RAW, OUT = ROOT / "data", ROOT / "data" / "processed"
 
 FILES = {"normal": "press_data_normal.csv", "abnormal": "outlier_data.csv"}
 SIGNALS = {"AI0_Vibration": "v0", "AI1_Vibration": "v1", "AI2_Current": "cur"}
-META_COLS = ["window_id", "segment_id", "source", "label", "split",
-             "t_start", "t_end", "pos_in_seg", "seg_len"]
+META_COLS = ["window_id",
+            "segment_id",
+            "source",
+            "label",
+            "split",
+            "t_start",
+            "t_end",
+            "pos_in_seg",
+            "seg_len"
+            ]
 FS, GAP_SEC, TEST_EVERY, EPS = 10.0, 0.15, 5, 1e-12
 
 
@@ -217,9 +225,9 @@ def main(window=10, stride=1, spectral=False, verbose=True):
         for src in FILES:
             d = diag[src]
             print(f"[{src}] raw={d['rows_raw']}, clean={d['rows_clean']}, "
-                  f"dup={d['duplicates_removed']}, dt={d['median_dt_sec']:.4f}s, "
-                  f"gaps={d['large_gaps']}, non_inc={d['non_increasing']}, "
-                  f"segments={d['n_segments']}")
+                f"dup={d['duplicates_removed']}, dt={d['median_dt_sec']:.4f}s, "
+                f"gaps={d['large_gaps']}, non_inc={d['non_increasing']}, "
+                f"segments={d['n_segments']}")
         print(json.dumps(diag["windowing"], indent=2, ensure_ascii=False, default=str))
 
     return data, feats

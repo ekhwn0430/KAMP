@@ -1,3 +1,33 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks
+
+# 04_Data_Processing/preprocess.py에서 만든 공식 전처리 데이터를 직접 불러온다. (01_Cycle.py와 같은 방식)
+from pathlib import Path
+import pandas as pd
+
+def find_data_path():
+    for root in [Path.cwd(), *Path.cwd().parents]:
+        for p in (root/"data"/"processed"/"preprocessed_data.csv", root/"data"/"preprocessed_data.csv"):
+            if p.exists():
+                return p
+    raise FileNotFoundError("data/(processed/)preprocessed_data.csv를 찾지 못함")
+
+DATA_PATH=find_data_path()
+data=pd.read_csv(DATA_PATH,parse_dates=["TimeStamp"])
+
+normal=data[data["source"]=="normal"].copy()
+outlier=data[data["source"]=="abnormal"].copy()
+
+# Cycle 검출 기준값 (01_Cycle.py / 05.EDA_0_Cycle.py와 동일)
+CHANNELS=["AI0_Vibration","AI1_Vibration","AI2_Current"]
+SAMPLE_RATE_HZ=10.0
+MIN_SEGMENT_ROWS=30
+CYCLE_ANCHOR="AI2_Current"
+CYCLE_MIN_PEAK_DISTANCE_SAMPLES=12
+
+
 def segment_peak_diagnostics(df, dataset_name):
     rows = []
     for segment_id, group in df.groupby("segment_id", sort=False):
@@ -12,7 +42,7 @@ def segment_peak_diagnostics(df, dataset_name):
         )[0] if eligible else np.array([], dtype=int)
         rows.append({
             "dataset": dataset_name,
-            "segment_id": int(segment_id),
+            "segment_id": segment_id,
             "n_samples": len(group),
             "AI2_std": ai2_std,
             "current_prominence": prominence,
@@ -28,19 +58,19 @@ segment_diagnostics = pd.concat([normal_segment_diagnostics, outlier_segment_dia
 
 for name, diagnostics in [("Normal", normal_segment_diagnostics), ("Outlier", outlier_segment_diagnostics)]:
     print(f"{name}: segment-level detector diagnostics (all segments)")
-    display(diagnostics)
+    print(diagnostics)
     eligible = diagnostics.loc[diagnostics["eligible_by_length"]]
     print(f"{name}: eligible segment counts; segments shorter than {MIN_SEGMENT_ROWS} are skipped by the existing detector")
-    display(eligible[["AI2_std", "current_prominence", "peak_count"]].describe().T)
+    print(eligible[["AI2_std", "current_prominence", "peak_count"]].describe().T)
 
 outlier_eligible = outlier_segment_diagnostics.loc[outlier_segment_diagnostics["eligible_by_length"]].copy()
 outlier_eligible["peak_group"] = pd.cut(
     outlier_eligible["peak_count"], bins=[-1, 0, 1, np.inf], labels=["peak 0", "peak 1", "peak 2+"],
 )
 print("Outlier eligible segment counts by peak group:")
-display(outlier_eligible["peak_group"].value_counts().reindex(["peak 0", "peak 1", "peak 2+"], fill_value=0).rename("segment_count").to_frame())
+print(outlier_eligible["peak_group"].value_counts().reindex(["peak 0", "peak 1", "peak 2+"], fill_value=0).rename("segment_count").to_frame())
 print("Outlier eligible segment details:")
-display(outlier_eligible[["segment_id", "n_samples", "AI2_std", "current_prominence", "peak_count"]])
+print(outlier_eligible[["segment_id", "n_samples", "AI2_std", "current_prominence", "peak_count"]])
 
 fig, axes = plt.subplots(1, 3, figsize=(14, 4), constrained_layout=True)
 for ax, metric, title in zip(axes, ["AI2_std", "current_prominence", "peak_count"], ["AI2 rolling-median std", "Adaptive prominence", "Detected peaks"]):
@@ -65,7 +95,7 @@ for row_plot, (category, minimum_peaks) in enumerate(peak_categories):
         continue
     target_std = candidates["AI2_std"].median()
     chosen = candidates.iloc[(candidates["AI2_std"] - target_std).abs().argsort()[:1]]
-    segment_id = int(chosen.iloc[0]["segment_id"])
+    segment_id = chosen.iloc[0]["segment_id"]
     group = outlier.loc[outlier["segment_id"] == segment_id]
     raw = group[CYCLE_ANCHOR].to_numpy(dtype=float)
     smooth = pd.Series(raw).rolling(3, center=True, min_periods=1).median().to_numpy()
@@ -106,17 +136,17 @@ def detect_peak_method(df, dataset_name, method_name, fixed_prominence=None):
             if fixed_prominence is None else fixed_prominence
         )
         peaks = find_peaks(smooth, distance=CYCLE_MIN_PEAK_DISTANCE_SAMPLES, prominence=threshold)[0]
-        peak_locations[(dataset_name, int(segment_id), method_name)] = peaks
+        peak_locations[(dataset_name, segment_id, method_name)] = peaks
         durations = np.diff(group["elapsed_sec"].to_numpy()[peaks]) if len(peaks) > 1 else np.array([])
         summary_rows.append({
             "dataset": dataset_name,
             "method": method_name,
-            "segment_id": int(segment_id),
+            "segment_id": segment_id,
             "peak_count": len(peaks),
             "candidate_cycle_count": max(len(peaks) - 1, 0),
         })
         duration_rows.extend({
-            "dataset": dataset_name, "method": method_name, "segment_id": int(segment_id),
+            "dataset": dataset_name, "method": method_name, "segment_id": segment_id,
             "duration_sec": float(duration),
         } for duration in durations if duration > 0)
     return pd.DataFrame(summary_rows), pd.DataFrame(duration_rows), peak_locations
@@ -137,7 +167,7 @@ comparison_counts = method_summary.groupby(["dataset", "method"])[["peak_count",
     "peak_count": "total_peaks", "candidate_cycle_count": "total_candidate_cycles",
 })
 print("Adaptive vs Normal-derived fixed threshold: total peaks and peak-to-peak cycles")
-display(comparison_counts)
+print(comparison_counts)
 
 def duration_stats(values):
     values = pd.Series(values, dtype=float)
@@ -147,7 +177,7 @@ def duration_stats(values):
         "Q3": values.quantile(.75), "max": values.max(),
     })
 print("Cycle duration distributions by dataset and detector:")
-display(method_duration_table.groupby(["dataset", "method"])["duration_sec"].apply(duration_stats).unstack())
+print(method_duration_table.groupby(["dataset", "method"])["duration_sec"].apply(duration_stats).unstack())
 
 
 fig, axes = plt.subplots(3, 1, figsize=(13, 10), squeeze=False, constrained_layout=True)
@@ -158,7 +188,7 @@ for row_plot, (category, _) in enumerate(peak_categories):
         ax.text(0.5, 0.5, f"No eligible Outlier segment in {category}", ha="center", va="center")
         ax.set_axis_off()
         continue
-    chosen_id = int(candidates.sort_values("segment_id").iloc[len(candidates) // 2]["segment_id"])
+    chosen_id = candidates.sort_values("segment_id").iloc[len(candidates) // 2]["segment_id"]
     group = outlier.loc[outlier["segment_id"] == chosen_id]
     raw = group[CYCLE_ANCHOR].to_numpy(dtype=float)
     smooth = pd.Series(raw).rolling(3, center=True, min_periods=1).median().to_numpy()

@@ -243,7 +243,7 @@ period_df=pd.DataFrame(period_results)
 total_segments=normal["segment_id"].nunique()
 valid_segments=period_df["period_sec"].notna().sum()
 
-display(period_df.head())
+print(period_df.head())
 
 print(f"전체 Normal segments     : {total_segments}")
 print(f"주기 계산 가능 segments : {valid_segments}")
@@ -270,7 +270,7 @@ period_summary=pd.Series({
     "ACF_median":valid_period["acf_corr"].median()
 },name="Normal AI2 periodicity")
 
-display(period_summary.to_frame())
+print(period_summary.to_frame())
 
 # %%
 # 각 Normal segment가 선택한 최적 반복주기가 어느 값에 집중되는지 확인한다.
@@ -292,7 +292,7 @@ period_distribution=pd.DataFrame({
 
 period_distribution.index.name="period_sec"
 
-display(period_distribution)
+print(period_distribution)
 
 # %%
 # 각 Normal segment에서 1.2~2.2초의 lag별 AI2 자기유사성을 직접 비교한다.
@@ -456,7 +456,7 @@ for segment_id,group in normal.groupby("segment_id",sort=False):
 phase_df=pd.DataFrame(phase_results)
 
 print(f"Comparable segments : {len(phase_df)}")
-display(phase_df.head())
+print(phase_df.head())
 
 # %%
 # 1.7초 후 AI2_Current가 segment 시작값으로 얼마나 복귀하는지 수치로 요약한다.
@@ -469,7 +469,7 @@ return_summary=pd.DataFrame({
     "normalized_return_error":phase_df["normalized_return_error"].describe()[["count","mean","25%","50%","75%","std"]]
 })
 
-display(return_summary)
+print(return_summary)
 
 print(f"Median absolute return error   : {phase_df['abs_delta_1_7s'].median():.6f}")
 print(f"Median normalized return error : {phase_df['normalized_return_error'].median():.6f}")
@@ -523,7 +523,7 @@ for lag in TEST_LAGS:
 
 lag_df=pd.DataFrame(lag_results)
 
-display(lag_df)
+print(lag_df)
 
 print(f"Common comparable segments : {len(eligible_groups)}")
 

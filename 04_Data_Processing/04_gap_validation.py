@@ -1,3 +1,27 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 04_Data_Processing/preprocess.py에서 만든 공식 전처리 데이터를 직접 불러온다. (01_Cycle.py와 같은 방식)
+from pathlib import Path
+import pandas as pd
+
+def find_data_path():
+    for root in [Path.cwd(), *Path.cwd().parents]:
+        for p in (root/"data"/"processed"/"preprocessed_data.csv", root/"data"/"preprocessed_data.csv"):
+            if p.exists():
+                return p
+    raise FileNotFoundError("data/(processed/)preprocessed_data.csv를 찾지 못함")
+
+DATA_PATH=find_data_path()
+data=pd.read_csv(DATA_PATH,parse_dates=["TimeStamp"])
+
+normal=data[data["source"]=="normal"].copy()
+outlier=data[data["source"]=="abnormal"].copy()
+
+CHANNELS=["AI0_Vibration","AI1_Vibration","AI2_Current"]
+
+
 GAP_THRESHOLD_SEC = 0.15
 GAP_DATASETS = {"Normal": normal, "Outlier": outlier}
 
@@ -16,14 +40,14 @@ def interval_summary(values):
 
 all_dt_summary = pd.DataFrame({name: interval_summary(df["dt_sec"]) for name, df in GAP_DATASETS.items()}).T
 print("All timestamp intervals (sec):")
-display(all_dt_summary)
+print(all_dt_summary)
 
 large_gap_summary = pd.DataFrame({
     name: interval_summary(df.loc[df["dt_sec"].gt(GAP_THRESHOLD_SEC).fillna(False), "dt_sec"])
     for name, df in GAP_DATASETS.items()
 }).T
 print(f"Large gap intervals only (dt_sec > {GAP_THRESHOLD_SEC} sec):")
-display(large_gap_summary)
+print(large_gap_summary)
 
 for name, df in GAP_DATASETS.items():
     gaps = df.loc[df["dt_sec"].gt(GAP_THRESHOLD_SEC).fillna(False), "dt_sec"]
@@ -53,9 +77,9 @@ for name, df in GAP_DATASETS.items():
     gap_position_tables[name] = table
     print(f"{name}: gap source rows and distance from previous gap")
     with pd.option_context("display.max_rows", None, "display.max_columns", None):
-        display(table)
+        print(table)
     print("Row-distance value counts:")
-    display(pd.Series(row_distance, name="row_distance").value_counts().sort_index().to_frame())
+    print(pd.Series(row_distance, name="row_distance").value_counts().sort_index().to_frame())
     if len(row_distance):
         print(
             f"Median row distance={np.median(row_distance):.1f}; "
@@ -63,7 +87,7 @@ for name, df in GAP_DATASETS.items():
             f"within 45-55 rows={np.mean((row_distance >= 45) & (row_distance <= 55)):.1%}"
         )
         print("Gap source row modulo 50:")
-        display(pd.Series(gap_rows % 50, name="source_row_mod_50").value_counts().sort_index().to_frame())
+        print(pd.Series(gap_rows % 50, name="source_row_mod_50").value_counts().sort_index().to_frame())
 
 
 normal_gap_mask = normal["dt_sec"].gt(GAP_THRESHOLD_SEC).fillna(False)

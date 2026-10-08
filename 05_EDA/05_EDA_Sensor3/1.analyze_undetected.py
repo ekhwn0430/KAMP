@@ -7,7 +7,7 @@ RMS 미검출 이상 분석
 4) 팀 가설 H1~H3을 순서대로 추가했을 때 미검출이 얼마나 설명되는지(누적)
 5) 이상 구간별 요약, 이상 행별 판정 상태
 
-실행:  python analyze_undetected.py      (preprocess.py와 같은 폴더)
+실행:  python analyze_undetected.py      (04_04_04_Preprocessing.py와 같은 폴더)
 출력:  results/undetected/*.csv
 
 기준
@@ -21,6 +21,12 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
 
+# preprocess.py는 04_Data_Processing 폴더에 있으므로 import 경로에 추가한다.
+import sys
+try: _here = Path(__file__).resolve().parent
+except NameError: _here = Path.cwd()
+_root = next(p for p in [_here, *_here.parents] if (p / "04_Data_Processing" / "preprocess.py").exists())
+sys.path.insert(0, str(_root / "04_Data_Processing"))
 from preprocess import load_and_clean, make_features, feature_cols
 
 ROOT = Path(__file__).resolve().parent
@@ -76,14 +82,14 @@ def main():
         a = g.label == 1
         seg = g.groupby("segment_id").agg(label=("label", "first"), alarm=("flag", "max"))
         rows.append({"window": W, "seconds": W / 10,
-                     "abnormal_rows_evaluable": int(a.sum()),
-                     "abnormal_rows_not_evaluable": int((data.label == 1).sum() - a.sum()),
-                     "abnormal_segments_evaluable": f"{(seg.label == 1).sum()}/{n_seg[1]}",
-                     "normal_segments_evaluable": f"{(seg.label == 0).sum()}/{n_seg[0]}",
-                     "row_detect_rate": g.loc[a, "flag"].mean(),
-                     "abnormal_segment_detect_rate": seg.loc[seg.label == 1, "alarm"].mean(),
-                     "normal_row_false_alarm_rate": g.loc[~a, "flag"].mean(),
-                     "normal_segment_false_alarm_rate": seg.loc[seg.label == 0, "alarm"].mean()})
+                    "abnormal_rows_evaluable": int(a.sum()),
+                    "abnormal_rows_not_evaluable": int((data.label == 1).sum() - a.sum()),
+                    "abnormal_segments_evaluable": f"{(seg.label == 1).sum()}/{n_seg[1]}",
+                    "normal_segments_evaluable": f"{(seg.label == 0).sum()}/{n_seg[0]}",
+                    "row_detect_rate": g.loc[a, "flag"].mean(),
+                    "abnormal_segment_detect_rate": seg.loc[seg.label == 1, "alarm"].mean(),
+                    "normal_row_false_alarm_rate": g.loc[~a, "flag"].mean(),
+                    "normal_segment_false_alarm_rate": seg.loc[seg.label == 0, "alarm"].mean()})
     by_window = pd.DataFrame(rows)
     by_window.to_csv(OUT / "baseline_by_window.csv", index=False)
 
@@ -104,10 +110,10 @@ def main():
     for c in cand:
         auc = roc_auc_score(y, np.r_[feats.loc[N, c], feats.loc[U, c]])
         auc_rows.append({"feature": c, "auc": max(auc, 1 - auc),
-                         "direction": "higher_in_undetected" if auc >= 0.5 else "lower_in_undetected",
-                         "normal_median": feats.loc[N, c].median(),
-                         "undetected_median": feats.loc[U, c].median(),
-                         "detected_median": feats.loc[A & feats.rms_flag, c].median()})
+                        "direction": "higher_in_undetected" if auc >= 0.5 else "lower_in_undetected",
+                        "normal_median": feats.loc[N, c].median(),
+                        "undetected_median": feats.loc[U, c].median(),
+                        "detected_median": feats.loc[A & feats.rms_flag, c].median()})
     auc_df = pd.DataFrame(auc_rows).sort_values("auc", ascending=False)
     auc_df.to_csv(OUT / "feature_auc_undetected_vs_normal.csv", index=False)
 
@@ -134,7 +140,7 @@ def main():
 
     seg = (ab.groupby(["segment_id", "explained_by"]).size().unstack(fill_value=0))
     med = feats[A].groupby("segment_id")[["v0_rms", "v1_rms", "cur_rms", "v1_resid",
-                                          "corr_v0_v1", "cur_mean", "cur_ac1"]].median()
+                                        "corr_v0_v1", "cur_mean", "cur_ac1"]].median()
     seg = seg.join(med).round(3)
     seg.to_csv(OUT / "segment_summary.csv")
 

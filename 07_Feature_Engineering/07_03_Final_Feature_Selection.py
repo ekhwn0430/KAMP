@@ -147,7 +147,7 @@ quality_issue = quality[
 
 print("Quality issue features:", len(quality_issue))
 if len(quality_issue):
-    display(quality_issue)
+    print(quality_issue)
 
 counts = (
     feature_table
@@ -157,7 +157,7 @@ counts = (
     .reset_index()
 )
 
-display(counts)
+print(counts)
 
 n_abnormal = int((feature_table["source"] == "abnormal").sum())
 print("Abnormal full-cycle count:", n_abnormal)
@@ -199,7 +199,7 @@ alias_table = pd.DataFrame(
     [{"feature": k, "report_name": v} for k, v in FEATURE_ALIAS.items()]
 )
 
-display(alias_table)
+print(alias_table)
 
 
 # %% [markdown]
@@ -264,7 +264,7 @@ validation["screening_candidate"] = validation["feature"].isin(shortlist["featur
 validation["report_name"] = validation["feature"].map(FEATURE_ALIAS).fillna(validation["feature"])
 
 print("Master features:", len(validation))
-display(
+print(
     validation[
         [
             "feature",
@@ -422,7 +422,7 @@ decision_table = decision_table.sort_values(
     ascending=[True, False]
 ).drop(columns="_order").reset_index(drop=True)
 
-display(
+print(
     decision_table[
         [
             "feature",
@@ -484,7 +484,7 @@ for a, b in check_pairs:
     })
 
 redundancy_check = pd.DataFrame(redundancy_check)
-display(redundancy_check)
+print(redundancy_check)
 
 
 # %% [markdown]
@@ -567,7 +567,7 @@ print("n SUPPORT  :", len(support_features))
 print("Core table :", final_core.shape)
 print("Explain table:", final_explain.shape)
 
-display(final_core.head())
+print(final_core.head())
 
 
 # %% [markdown]
@@ -611,7 +611,7 @@ summary = (
 
 summary.to_csv(summary_path, index=False)
 
-display(summary)
+print(summary)
 
 print("\nSaved:")
 for p in [decision_path, core_path, explain_path, alias_path, summary_path]:

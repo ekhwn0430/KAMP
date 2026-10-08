@@ -85,7 +85,7 @@ quality_df = pd.DataFrame(quality_rows)
 quality_df["is_constant"] = quality_df["unique_count"] <= 1
 quality_df["high_missing"] = quality_df["missing_ratio"] > 0.20
 
-display(
+print(
     quality_df.sort_values(
         ["high_missing", "is_constant", "missing_ratio"],
         ascending=[False, False, False]
@@ -158,7 +158,7 @@ distribution_summary.to_csv(
     index=False
 )
 
-display(distribution_summary.head(20))
+print(distribution_summary.head(20))
 
 
 # ============================================================
@@ -229,7 +229,7 @@ validation_df.to_csv(
     index=False
 )
 
-display(validation_df.head(30))
+print(validation_df.head(30))
 
 
 # ============================================================
@@ -295,7 +295,7 @@ threshold_df.to_csv(
     index=False
 )
 
-display(threshold_df.head(30))
+print(threshold_df.head(30))
 
 
 # ============================================================
@@ -342,7 +342,7 @@ redundant_df.to_csv(
     index=False
 )
 
-display(redundant_df.head(30))
+print(redundant_df.head(30))
 
 
 # ============================================================
@@ -381,7 +381,7 @@ phase_ranking.to_csv(
     index=False
 )
 
-display(phase_ranking.head(20))
+print(phase_ranking.head(20))
 
 
 # ============================================================
@@ -444,7 +444,7 @@ core_validation.to_csv(
     index=False
 )
 
-display(core_validation)
+print(core_validation)
 
 
 # ============================================================
@@ -486,7 +486,7 @@ candidate.to_csv(
     index=False
 )
 
-display(candidate.head(30))
+print(candidate.head(30))
 
 
 # ============================================================
@@ -573,7 +573,7 @@ family_best.to_csv(
     index=False
 )
 
-display(family_best)
+print(family_best)
 
 
 # ============================================================

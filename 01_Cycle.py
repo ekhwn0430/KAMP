@@ -170,7 +170,7 @@ summary=pd.DataFrame({
 },index=["Normal","Abnormal"])
 
 print("DATA_PATH:",DATA_PATH)
-display(summary)
+print(summary)
 
 # %%
 from scipy.signal import find_peaks, periodogram
@@ -293,7 +293,7 @@ periodicity_summary=pd.DataFrame([
     for r in normal_cycle_results.values()
 ])
 
-display(periodicity_summary)
+print(periodicity_summary)
 
 # %%
 CYCLE_ANCHOR="AI2_Current"
@@ -385,7 +385,7 @@ print(
     f"{cycle_features['duration_sec'].quantile(.75):.2f} s"
 )
 
-display(cycle_features.head())
+print(cycle_features.head())
 
 # %%
 eligible_sizes=normal.groupby("segment_id",sort=False).size()
@@ -441,7 +441,7 @@ duration_summary=pd.Series({
     "fraction_1.6_to_1.7":normal_durations.round(1).between(1.6,1.7,inclusive="both").mean()
 },name="Normal cycle duration")
 
-display(duration_summary.to_frame())
+print(duration_summary.to_frame())
 
 fig,axes=plt.subplots(1,3,figsize=(15,4),constrained_layout=True)
 
@@ -525,6 +525,6 @@ shape_summary=cycle_shape_metrics.groupby("channel")[
 ].agg(["count","mean","median","std","min","max"])
 
 print("Normal cycle shape consistency:")
-display(shape_summary)
+print(shape_summary)
 
 
